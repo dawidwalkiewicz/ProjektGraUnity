@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class RegulationRing : MonoBehaviour
     public KeyCode regulateMinusKey = KeyCode.Minus;
     public KeyCode regulatePlusKey = KeyCode.Plus;
 
-    private HashSet<KeyCode> keysToCheck;
+    private readonly HashSet<KeyCode> keysToCheck;
     int numberOfRegulationKeyPressed;
 
     public Door door;

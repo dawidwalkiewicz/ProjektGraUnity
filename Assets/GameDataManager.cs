@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -25,8 +26,8 @@ public class GameDataManager : MonoBehaviour
     int livesLeft = 3;
     readonly int magazineBulletsLeft = 30;
     readonly int totalBulletsLeft = 270;
-    public Door doori;
-    public Wall wall1, wall2;
+    public List<Door> doors;
+    public List<Wall> walls;
     public Ceiling ceiling;
 
     private void Awake()
@@ -80,16 +81,16 @@ public class GameDataManager : MonoBehaviour
 
     public void NeutralizeDoor()
     {
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= doors.Count; i++)
         {
-            if (doori.doorValue > 0 && distance <= 0.3)
+            if (doors[i].doorValue > 0 && distance <= 0.3)
             {
-                doori.GetComponent<MeshRenderer>().material.color = Color.red;
+                doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
                 RemoveLife();
             }
-            else if (doori.doorValue > 0 && distance <= 3.5 && distance > 0.3)
+            else if (doors[i].doorValue > 0 && distance <= 3.5 && distance > 0.3)
             {
-                //regulationRing.Interact(doori);
+                //regulationRing.Interact(doors[i]);
             }
             else
             {
