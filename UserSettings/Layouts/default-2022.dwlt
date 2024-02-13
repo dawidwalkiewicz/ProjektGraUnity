@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 42
+  controlID: 43
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 43
+  controlID: 44
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 44
+  controlID: 45
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -358,7 +358,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/InteractionSystem
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -366,16 +366,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/InteractionSystem
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Dokumenty\DoPracy\ProjektGraUnity
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1e570000
-    m_LastClickedID: 22302
-    m_ExpandedIDs: 00000000125700001457000000ca9a3b
+    m_SelectedIDs: d6560000
+    m_LastClickedID: 22230
+    m_ExpandedIDs: 00000000ae560000b056000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -403,7 +403,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001257000014570000
+    m_ExpandedIDs: 00000000ae560000b0560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -544,21 +544,21 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 24980000
-      m_LastClickedID: 38948
-      m_ExpandedIDs: 362fffffe22fffff2830ffff9a42ffffa043ffffe648ffff9649ffffa857ffff9058ffffec5afffff25bffff7c75ffff1a76fffff076ffffa283ffff1084ffff36a2ffffc6a3ffff20d7ffffaad7ffff0ad9ffff9edafffff0e1ffffa0faffff905600004e5b00009e5f000070600000b86000001a61000066610000c26a0000126c0000f674000018750000ea7600005c780000be7f0000a28000009c830000808400004c850000ae880000f2880000a28a0000ea8d0000128f0000de8f0000
+      scrollPos: {x: 0, y: 183.67538}
+      m_SelectedIDs: c2d8feff
+      m_LastClickedID: -75582
+      m_ExpandedIDs: 8a32ffffbc40ffffbe4affffc24bffff344cffff8a4effff6057ffff365affffee5affff545effffc860ffffde62ffff2a75ffffbc76ffffea78ffff0894ffff4495ffffd2a4ffff4ca5ffff92a6ffff2afbffff94550000a4550000de55000022560000525600009a76000016790000107f0000f67f00003a96000086960000b4a1000076a4000062a500002ea60000a8a60000a6a8000046aa000010b6000032b60000a8ba0000b4ba0000c4ba0000e6ba00001abb00004ebb00007ebb0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Grenade
-        m_OriginalName: Grenade
+        m_Name: MeasureDevice
+        m_OriginalName: MeasureDevice
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 36746
+        m_UserData: 47926
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -941,9 +941,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -6.0000005, y: 9.66316, z: 2.691}
+    m_Target: {x: 30, y: 1, z: 10}
     speed: 2
-    m_Value: {x: -6.0000005, y: 9.66316, z: 2.691}
+    m_Value: {x: 30, y: 1, z: 10}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -991,11 +991,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+    m_Value: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 12.124355
+    m_Target: 1.0413358
     speed: 2
-    m_Value: 12.124355
+    m_Value: 1.0413358
   m_Ortho:
     m_Target: 0
     speed: 2

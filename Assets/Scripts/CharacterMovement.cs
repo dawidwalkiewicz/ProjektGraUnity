@@ -11,8 +11,8 @@ public class CharacterMovement : MonoBehaviour
     public float airMultiplier;
     bool readyToJump;
 
-    /*[Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;*/
+    [Header("Keybinds")]
+    public KeyCode jumpKey = KeyCode.Space;
 
     [Header("Ground Check")]
     public float characterHeight;
@@ -35,10 +35,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        rb.GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
         mainCamera = Camera.main;
         readyToJump = true;
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     private void Update()
@@ -63,10 +63,10 @@ public class CharacterMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         var dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        transform.Translate(dir * moveSpeed * Time.deltaTime);
+        transform.Translate(moveSpeed * Time.deltaTime * dir);
 
         //jumpInput = Input.GetAxisRaw("Jump");
-        if (Input.GetButton("Jump") && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
 
@@ -81,17 +81,17 @@ public class CharacterMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         if (grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(10f * moveSpeed * moveDirection.normalized, ForceMode.Force);
         }
         else if (!grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(10f * airMultiplier * moveSpeed * moveDirection.normalized, ForceMode.Force);
         }
     }
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new(rb.velocity.x, 0f, rb.velocity.z);
 
         if (flatVel.magnitude > moveSpeed)
         {

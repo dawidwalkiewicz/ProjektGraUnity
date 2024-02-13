@@ -22,8 +22,24 @@ public class FinalResultsScreen : MonoBehaviour
         {
             resultsText.text += "/nToo high value set";
         }
-
+        if (statistics.tooLowValue == true)
+        {
+            resultsText.text += "/nToo low value set";
+        }
+        if (statistics.wrongRingSettings == true)
+        {
+            resultsText.text += "/nWrong ring settings";
+        }
+        if (statistics.missedWalls > 0)
+        {
+            resultsText.text += "/nMissed walls: " + statistics.missedWalls;
+        }
+        else
+        {
+            resultsText.text += "/nMissed walls: 0";
+        }
     }
+
     public void NewGame()
     {
         if (tryAgainButton.onClick != null)

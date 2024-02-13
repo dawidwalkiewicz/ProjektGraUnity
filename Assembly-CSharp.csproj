@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\InteractionSystem\Door.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObject.cs" />
+    <Compile Include="Assets\Scripts\InteractionSystem\WardrobeDoor.cs" />
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
     <Compile Include="Assets\Scripts\InteractionDetector.cs" />
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
