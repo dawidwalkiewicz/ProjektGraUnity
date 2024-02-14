@@ -107,7 +107,7 @@ public class GameDataManager : MonoBehaviour
     {
         /*if (hitTarget.Wall == 1 && hitTarget.Ceiling == 1)
         {
-            
+            doors[i].OnTriggerEnter(doors[i]);
         }*/
     }
 }
