@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     public string InteractionPrompt => prompt;
     public int doorValue = Random.Range(0, 9);
     public GameDataManager gdManager;
+    Animator _doorAnim;
 
     RaycastHit rcHit;
     float distance;
