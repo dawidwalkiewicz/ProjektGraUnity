@@ -1,0 +1,6 @@
+D:\Dokumenty\DoPracy\ProjektGraUnity\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+D:\Dokumenty\DoPracy\ProjektGraUnity\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+D:\Dokumenty\DoPracy\ProjektGraUnity\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Dokumenty\DoPracy\ProjektGraUnity\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Dokumenty\DoPracy\ProjektGraUnity\obj\Debug\Assembly-CSharp.dll
+D:\Dokumenty\DoPracy\ProjektGraUnity\obj\Debug\Assembly-CSharp.pdb
