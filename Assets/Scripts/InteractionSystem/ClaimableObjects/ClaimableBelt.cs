@@ -8,11 +8,13 @@ public class ClaimableBelt : MonoBehaviour
     public GameObject claimObjectText;
     public GameObject beltOnCharacter;
     public WardrobeDoor wardrobeDoor;
+    public bool isClaimed;
 
     private void Start()
     {
         beltOnCharacter.SetActive(false);
         claimObjectText.SetActive(false);
+        isClaimed = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -25,6 +27,7 @@ public class ClaimableBelt : MonoBehaviour
                 this.gameObject.SetActive(false);
                 beltOnCharacter.SetActive(true);
                 claimObjectText.SetActive(false);
+                isClaimed = true;
             }
         }
     }

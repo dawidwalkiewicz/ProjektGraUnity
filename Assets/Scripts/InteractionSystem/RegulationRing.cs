@@ -16,7 +16,17 @@ public class RegulationRing : MonoBehaviour
     public Door door;
     public MeasureDevice measureDevice;
 
-    public bool Interact(Interactor interactor)
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        
+    }
+
+    /*public bool Interact(Interactor interactor)
     {
         if (door.doorValue > 0)
         {
@@ -32,5 +42,5 @@ public class RegulationRing : MonoBehaviour
             measureDevice.doorValueText.text = "Door value: 0/nDoor neutralized.";
         }
         return true;
-    }
+    }*/
 }

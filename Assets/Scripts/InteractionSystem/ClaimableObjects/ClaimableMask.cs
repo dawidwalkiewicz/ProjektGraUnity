@@ -7,11 +7,13 @@ public class ClaimableMask : MonoBehaviour
     public GameObject claimObjectText;
     public GameObject maskOnCharacter;
     public WardrobeDoor wardrobeDoor;
+    public bool isClaimed;
 
     private void Start()
     {
         maskOnCharacter.SetActive(false);
         claimObjectText.SetActive(false);
+        isClaimed = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -24,6 +26,7 @@ public class ClaimableMask : MonoBehaviour
                 this.gameObject.SetActive(false);
                 maskOnCharacter.SetActive(true);
                 claimObjectText.SetActive(false);
+                isClaimed = true;
             }
         }
     }

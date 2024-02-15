@@ -7,11 +7,13 @@ public class ClaimableMeasureDevice : MonoBehaviour
     public GameObject claimObjectText;
     public GameObject measureDeviceOnCharacter;
     public WardrobeDoor wardrobeDoor;
+    public bool isClaimed;
 
     private void Start()
     {
         measureDeviceOnCharacter.SetActive(false);
         claimObjectText.SetActive(false);
+        isClaimed = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -24,6 +26,7 @@ public class ClaimableMeasureDevice : MonoBehaviour
                 this.gameObject.SetActive(false);
                 measureDeviceOnCharacter.SetActive(true);
                 claimObjectText.SetActive(false);
+                isClaimed = true;
             }
         }
     }

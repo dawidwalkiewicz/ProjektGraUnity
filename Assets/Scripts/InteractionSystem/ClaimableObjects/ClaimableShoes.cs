@@ -7,11 +7,13 @@ public class ClaimableShoes : MonoBehaviour
     public GameObject claimObjectText;
     public GameObject shoesOnCharacter;
     public WardrobeDoor wardrobeDoor;
+    public bool isClaimed;
 
     private void Start()
     {
         shoesOnCharacter.SetActive(false);
         claimObjectText.SetActive(false);
+        isClaimed = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -24,6 +26,7 @@ public class ClaimableShoes : MonoBehaviour
                 this.gameObject.SetActive(false);
                 shoesOnCharacter.SetActive(true);
                 claimObjectText.SetActive(false);
+                isClaimed = true;
             }
         }
     }

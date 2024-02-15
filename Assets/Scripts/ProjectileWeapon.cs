@@ -67,10 +67,9 @@ public class ProjectileWeapon : MonoBehaviour
         readyToShoot = false;
         
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-        
+
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(75);
@@ -99,14 +98,14 @@ public class ProjectileWeapon : MonoBehaviour
         
         if (allowInvoke)
         {
-            Invoke("ResetShot", timeBetweenShooting);
+            Invoke(nameof(ResetShot), timeBetweenShooting);
             allowInvoke = false;
             
             playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
         }
         
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
-            Invoke("Shoot", timeBetweenShots);
+            Invoke(nameof(Shoot), timeBetweenShots);
     }
 
     private void ResetShot()
@@ -118,7 +117,7 @@ public class ProjectileWeapon : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        Invoke(nameof(ReloadFinished), reloadTime);
     }
     private void ReloadFinished()
     {

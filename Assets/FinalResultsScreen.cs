@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -6,11 +7,10 @@ public class FinalResultsScreen : MonoBehaviour
 {
     public Image background;
     public Text resultsText;
-    public Button tryAgainButton;
-    public Stats statistics;
-    public void Setup()
+    public GameObject tryAgainButton;
+    //public Stats statistics;
+    /*public void Setup()
     {
-        background.enabled = true;
         resultsText.text = "Time: " + statistics.gameCompletionTime + "/nNeutralized doors: " + statistics.neutralizedDoorsCounter +
             "/nUnneutralized doors: " + statistics.unneutralizedDoorsCounter +
             "/nNeutralized rooms: " + statistics.neutralizedRoomsCounter;
@@ -38,13 +38,17 @@ public class FinalResultsScreen : MonoBehaviour
         {
             resultsText.text += "/nMissed walls: 0";
         }
+    }*/
+
+    void Start()
+    {
+        tryAgainButton.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    public void NewGame()
+    void Update()
     {
-        if (tryAgainButton.onClick != null)
-        {
-            SceneManager.LoadScene("Phasis2");
-        }
+        //Setup();
     }
 }
