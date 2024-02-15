@@ -17,4 +17,10 @@ public class WardrobeDoor : MonoBehaviour
     {
         _wardrobeDoorAnim = this.transform.parent.GetComponent<Animator>();
     }
+
+    public bool AnimatorIsPlaying()
+    {
+        return _wardrobeDoorAnim.GetCurrentAnimatorStateInfo(0).length >
+               _wardrobeDoorAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
 }
