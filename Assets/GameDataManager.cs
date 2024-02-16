@@ -13,7 +13,6 @@ public class GameDataManager : MonoBehaviour
 
     public static GameDataManager instance;
     public Text lifeText;
-    public Text bulletsText;
     public Text gameOverText;
     public Image background;
     public bool dead = false;
@@ -24,8 +23,6 @@ public class GameDataManager : MonoBehaviour
     float distance;
 
     int livesLeft = 3;
-    readonly int magazineBulletsLeft = 30;
-    readonly int totalBulletsLeft = 270;
     public List<Door> doors;
     public List<Wall> walls;
     public Ceiling ceiling;
@@ -36,14 +33,18 @@ public class GameDataManager : MonoBehaviour
     }
     void Start()
     {
+        timerScript.enabled = true;
         lifeText.text = "x " + livesLeft.ToString();
-        bulletsText.text = magazineBulletsLeft.ToString() + "/" + totalBulletsLeft.ToString();
+        //bulletsText.text = magazineBulletsLeft.ToString() + "/" + totalBulletsLeft.ToString();
         background.enabled = false;
         gameOverText.enabled = false;
-        statistics.missedWalls = 3;
+        statistics.NeutralizedDoorsCounter = 0;
+        statistics.UnneutralizedDoorsCounter = 4;
+        statistics.NeutralizedRoomsCounter = 0;
+        statistics.MissedWalls = 3;
     }
 
-    public void Update()
+    void Update()
     {
         if (Physics.Raycast(transform.position, Vector3.forward, out rcHit))
         {
@@ -55,12 +56,12 @@ public class GameDataManager : MonoBehaviour
 
     public void RemoveLife()
     {
-        if (!neutralizedDoors)
+        /*if (!neutralizedDoors)
         {
             statistics.neutralizedDoorsCounter++;
             statistics.unneutralizedDoorsCounter--;
         }
-        else if (livesLeft > 0 && neutralizedDoors)
+        else */if (livesLeft > 0 && neutralizedDoors)
         {
             dead = true;
             livesLeft--;
@@ -74,7 +75,7 @@ public class GameDataManager : MonoBehaviour
             timerScript.enabled = false;
             background.enabled = true;
             gameOverText.enabled = true;
-            statistics.gameCompletionTime = timerScript.ToString();
+            statistics.GameCompletionTime = timerScript.ToString();
             SceneManager.LoadScene("Phasis3");
         }
     }
@@ -90,14 +91,14 @@ public class GameDataManager : MonoBehaviour
             }
             else if (doors[i].doorValue > 0 && distance <= 3.5 && distance > 0.3)
             {
-                //regulationRing.Interact(doors[i]);
+                regulationRing.RegulateDoor(doors);
             }
             else
             {
-                measureDevice.Update();
+                //measureDevice.Update();
                 neutralizedDoors = true;
-                statistics.neutralizedDoorsCounter++;
-                statistics.unneutralizedDoorsCounter--;
+                statistics.NeutralizedDoorsCounter++;
+                statistics.UnneutralizedDoorsCounter--;
                 ShootWalls();
             }
         }

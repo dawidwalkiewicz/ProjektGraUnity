@@ -13,34 +13,53 @@ public class RegulationRing : MonoBehaviour
     private readonly HashSet<KeyCode> keysToCheck;
     int numberOfRegulationKeyPressed;
 
-    public Door door;
     public MeasureDevice measureDevice;
+    public List<Door> doors;
+    Animator _ringAnim;
 
     void Start()
     {
-        
+        _ringAnim = this.transform.parent.GetComponent<Animator>();
     }
 
     void Update()
     {
-        
+        RegulateDoor(doors);
+        ResetRingSetting();
     }
 
-    /*public bool Interact(Interactor interactor)
+    public void RegulateDoor(List<Door> doors)
     {
-        if (door.doorValue > 0)
+        for (int i = 0; i <= doors.Count; i++)
         {
-            numberOfRegulationKeyPressed = keysToCheck.Count(key => Input.GetKey(regulateMinusKey));
-            for (int i = door.doorValue; i <= numberOfRegulationKeyPressed; i++)
+            numberOfRegulationKeyPressed = 0;
+            if (doors[i].doorValue > 0)
             {
-                door.doorValue--;
-                measureDevice.Update();
+                numberOfRegulationKeyPressed = keysToCheck.Count(key => Input.GetKey(regulateMinusKey));
+                for (int j = 0; j <= numberOfRegulationKeyPressed; j++)
+                {
+                    doors[i].doorValue--;
+                    measureDevice.MeasureDoorValue();
+                }
+            }
+            else if (doors[i].doorValue == 0)
+            {
+                measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
             }
         }
-        else if (door.doorValue == 0)
+    }
+
+    public void ResetRingSetting()
+    {
+        if (numberOfRegulationKeyPressed != 0)
         {
-            measureDevice.doorValueText.text = "Door value: 0/nDoor neutralized.";
+            for (int i = 0; i <= numberOfRegulationKeyPressed; i++)
+            {
+                if (Input.GetKey(regulatePlusKey))
+                {
+                    numberOfRegulationKeyPressed--;
+                }
+            }
         }
-        return true;
-    }*/
+    }
 }

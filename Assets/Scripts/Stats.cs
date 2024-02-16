@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-    public string gameCompletionTime = "0:00,000";
-    public int neutralizedDoorsCounter = 0;
-    public int unneutralizedDoorsCounter = 4;
-    public int neutralizedRoomsCounter = 0;
-    public int wallsCounter;
-    public int wallsHitOncePlusCounter;
-    public bool wasMeasurementSet;
-    public bool tooHighValue;
-    public bool tooLowValue;
-    public bool wrongRingSettings;
-    public int missedWalls;
-    public int wallsHitMoreThanOnce = 0;
+    public string GameCompletionTime { get; set; }
+    public int NeutralizedDoorsCounter { get; set; }
+    public int UnneutralizedDoorsCounter { get; set; }
+    public int NeutralizedRoomsCounter { get; set; }
+    public int WallsCounter { get; set; }
+    public int WallsHitOncePlusCounter { get; set; }
+    public bool WasMeasurementSet { get; set; }
+    public bool TooHighValue { get; set; }
+    public bool TooLowValue { get; set; }
+    public bool WrongRingSettings { get; set; }
+    public int MissedWalls { get; set; }
+    public int WallsHitMoreThanOnce { get; set; }
 }

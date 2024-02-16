@@ -51,10 +51,9 @@ public class CustomBullet : MonoBehaviour
         {
             if (enemies[i].GetComponent<Rigidbody>())
             {
-            enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
+                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
             }
         }
-
         Invoke(nameof(Delay), 0.05f);
     }
 

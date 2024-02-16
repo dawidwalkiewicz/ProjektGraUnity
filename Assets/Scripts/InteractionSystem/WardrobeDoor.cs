@@ -18,6 +18,14 @@ public class WardrobeDoor : MonoBehaviour
         _wardrobeDoorAnim = this.transform.parent.GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        if (_wardrobeDoorAnim != null && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            _wardrobeDoorAnim.Play("OpeningWardrobeClothesDoorAnimation");
+        }
+    }
+
     public bool AnimatorIsPlaying()
     {
         return _wardrobeDoorAnim.GetCurrentAnimatorStateInfo(0).length >

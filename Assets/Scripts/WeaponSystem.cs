@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class WeaponSystem : MonoBehaviour
     public GameObject muzzleFlash, bulletHoleGraphic;
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
-    public TextMeshProUGUI text;
+    public Text text;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class WeaponSystem : MonoBehaviour
     private void Update()
     {
         MyInput();
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        text.text = bulletsLeft + " / " + magazineSize;
     }
 
     private void MyInput()
