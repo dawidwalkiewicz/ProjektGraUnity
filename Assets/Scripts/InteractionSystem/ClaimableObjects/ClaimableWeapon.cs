@@ -5,7 +5,7 @@ public class ClaimableWeapon : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject weaponOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeArnamentDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

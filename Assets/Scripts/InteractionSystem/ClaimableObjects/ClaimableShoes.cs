@@ -6,7 +6,7 @@ public class ClaimableShoes : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject shoesOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeClothesDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

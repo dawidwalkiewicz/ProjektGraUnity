@@ -7,7 +7,7 @@ public class ClaimableBelt : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject beltOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeClothesDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Ceiling : MonoBehaviour
 {
+    readonly WeaponSystem weapon;
     public bool isCeilingHit = false;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        
+        WasCeilingHit();
+    }
+
+    public void WasCeilingHit()
+    {
+        if (weapon.damage == 1)
+        {
+            isCeilingHit = true;
+        }
     }
 }

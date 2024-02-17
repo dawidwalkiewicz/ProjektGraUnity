@@ -63,10 +63,10 @@
     <Compile Include="Assets\Scripts\CamShake.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Wall.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
-    <Compile Include="Assets\Scripts\InteractionSystem\WardrobeDoor.cs" />
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
     <Compile Include="Assets\GameDataManager.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableMeasureDevice.cs" />
+    <Compile Include="Assets\Scripts\InteractionSystem\WardrobeClothesDoor.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableBelt.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\Door.cs" />
+    <Compile Include="Assets\Scripts\InteractionSystem\WardrobeMasksDoor.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableGloves.cs" />
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\ProximityActivate.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Assets\Scripts\InteractionSystem\MeasureDevice.cs" />
     <Compile Include="Assets\FinalResultsScreen.cs" />
     <Compile Include="Assets\StartGameManager.cs" />
+    <Compile Include="Assets\Scripts\InteractionSystem\WardrobeArnamentDoor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

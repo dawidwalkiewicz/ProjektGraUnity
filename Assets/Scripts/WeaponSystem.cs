@@ -56,22 +56,14 @@ public class WeaponSystem : MonoBehaviour
 
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-
-        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
+        _ = fpsCam.transform.forward + new Vector3(x, y, 0);
 
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
             Target target = rayHit.transform.GetComponent<Target>();
 
-            for (int i = 1; i <= 2; i++)
-            {
-                if (target != null && rayHit.collider.CompareTag("Wall" + i))
-                {
-                    target.TakeDamage(damage);
-                }
-            }
-            if (target != null && rayHit.collider.CompareTag("Ceiling"))
+            if (target != null && rayHit.collider.CompareTag("Wall"))
             {
                 target.TakeDamage(damage);
             }
@@ -84,11 +76,11 @@ public class WeaponSystem : MonoBehaviour
         bulletsLeft--;
         bulletsShot--;
 
-        Invoke("ResetShot", timeBetweenShooting);
+        Invoke(nameof(ResetShot), timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
-            Invoke("Shoot", timeBetweenShots);
+            Invoke(nameof(Shoot), timeBetweenShots);
         }
     }
 
@@ -100,7 +92,7 @@ public class WeaponSystem : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        Invoke(nameof(ReloadFinished), reloadTime);
     }
 
     private void ReloadFinished()

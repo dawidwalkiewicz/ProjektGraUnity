@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;
     public int doorValue = Random.Range(0, 9);
-    public GameDataManager gdManager;
+    //public GameDataManager gdManager;
     Animator _doorAnim;
 
     private void OnTriggerEnter(Collider other)

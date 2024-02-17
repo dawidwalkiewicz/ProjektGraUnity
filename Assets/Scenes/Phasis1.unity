@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 276535392}
   glovesOnCharacter: {fileID: 675573229}
-  wardrobeDoor: {fileID: 390524865}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &100273916
 GameObject:
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 59312517}
   beltOnCharacter: {fileID: 1472936798}
-  wardrobeDoor: {fileID: 390524865}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &196941724
 GameObject:
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 199231607}
   - component: {fileID: 199231606}
   - component: {fileID: 199231605}
-  - component: {fileID: 199231604}
+  - component: {fileID: 199231608}
   m_Layer: 0
   m_Name: WardrobeArnamentDoorTrigger
   m_TagString: Untagged
@@ -1282,23 +1282,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.33, z: 0}
-  m_LocalScale: {x: 20, y: 0.33333334, z: 2}
+  m_LocalScale: {x: 10, y: 0.33333334, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683416405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &199231604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199231602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe72bbd50a3cb23459aa8282465e3df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &199231605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1370,6 +1358,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199231602}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &199231608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199231602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78a2835a6232f74b915977dc6064819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &251514206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 448113301}
   helmOnCharacter: {fileID: 1760027921}
-  wardrobeDoor: {fileID: 390524865}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &276535392
 GameObject:
@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 525007700}
   shoesOnCharacter: {fileID: 626744964}
-  wardrobeDoor: {fileID: 390524865}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &386017877
 GameObject:
@@ -2230,7 +2230,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.33, z: 0}
-  m_LocalScale: {x: 20, y: 0.33333334, z: 2}
+  m_LocalScale: {x: 10, y: 0.33333334, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1338961939}
@@ -2451,7 +2451,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 0
+  m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 386017877}
   vestOnCharacter: {fileID: 1229561868}
-  wardrobeDoor: {fileID: 390524865}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &597861371
 GameObject:
@@ -3686,7 +3686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 1088711215}
   weaponOnCharacter: {fileID: 2099151752}
-  wardrobeDoor: {fileID: 199231604}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!114 &695999925
 MonoBehaviour:
@@ -3969,7 +3969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 845966570}
   maskOnCharacter: {fileID: 1909734487}
-  wardrobeDoor: {fileID: 1990838705}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &797032483
 GameObject:
@@ -4091,7 +4091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   claimObjectText: {fileID: 1821396039}
   measureDeviceOnCharacter: {fileID: 883307835}
-  wardrobeDoor: {fileID: 199231604}
+  wardrobeDoor: {fileID: 0}
   isClaimed: 0
 --- !u!1 &799433848
 GameObject:
@@ -4937,7 +4937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091301311}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6542,7 +6542,7 @@ GameObject:
   - component: {fileID: 1990838708}
   - component: {fileID: 1990838707}
   - component: {fileID: 1990838706}
-  - component: {fileID: 1990838705}
+  - component: {fileID: 1990838709}
   m_Layer: 0
   m_Name: WardrobeMasksDoorTrigger
   m_TagString: Untagged
@@ -6560,23 +6560,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.33, z: 0}
-  m_LocalScale: {x: 20, y: 0.33333334, z: 2}
+  m_LocalScale: {x: 10, y: 0.33333334, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 451683909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1990838705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990838703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe72bbd50a3cb23459aa8282465e3df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1990838706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6648,6 +6636,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990838703}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1990838709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990838703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11078cc171161ae4ab44147e28cfa5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1992414231
 GameObject:
   m_ObjectHideFlags: 0

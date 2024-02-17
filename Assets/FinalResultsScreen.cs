@@ -8,37 +8,7 @@ public class FinalResultsScreen : MonoBehaviour
     public Image background;
     public Text resultsText;
     public GameObject tryAgainButton;
-    //public Stats statistics;
-    /*public void Setup()
-    {
-        resultsText.text = "Time: " + statistics.gameCompletionTime + "/nNeutralized doors: " + statistics.neutralizedDoorsCounter +
-            "/nUnneutralized doors: " + statistics.unneutralizedDoorsCounter +
-            "/nNeutralized rooms: " + statistics.neutralizedRoomsCounter;
-        if (statistics.wasMeasurementSet == false)
-        {
-            resultsText.text += "/nMeasurement was not set";
-        }
-        if (statistics.tooHighValue == true)
-        {
-            resultsText.text += "/nToo high value set";
-        }
-        if (statistics.tooLowValue == true)
-        {
-            resultsText.text += "/nToo low value set";
-        }
-        if (statistics.wrongRingSettings == true)
-        {
-            resultsText.text += "/nWrong ring settings";
-        }
-        if (statistics.missedWalls > 0)
-        {
-            resultsText.text += "/nMissed walls: " + statistics.missedWalls;
-        }
-        else
-        {
-            resultsText.text += "/nMissed walls: 0";
-        }
-    }*/
+    public Stats statistics;
 
     void Start()
     {
@@ -49,6 +19,38 @@ public class FinalResultsScreen : MonoBehaviour
 
     void Update()
     {
-        //Setup();
+        Setup();
+    }
+
+    public void Setup()
+    {
+        resultsText.text = "Time: " + statistics.GameCompletionTime + System.Environment.NewLine + "Neutralized doors: " +
+            statistics.NeutralizedDoorsCounter + System.Environment.NewLine + "Unneutralized doors: " +
+            statistics.UnneutralizedDoorsCounter + System.Environment.NewLine + "Neutralized rooms: " +
+            statistics.NeutralizedRoomsCounter;
+        if (statistics.WasMeasurementSet == false)
+        {
+            resultsText.text += System.Environment.NewLine + "Measurement was not set";
+        }
+        if (statistics.TooHighValue == true)
+        {
+            resultsText.text += System.Environment.NewLine + "Too high value set";
+        }
+        if (statistics.TooLowValue == true)
+        {
+            resultsText.text += System.Environment.NewLine + "Too low value set";
+        }
+        if (statistics.WrongRingSettings == true)
+        {
+            resultsText.text += System.Environment.NewLine + "Wrong ring settings";
+        }
+        if (statistics.MissedWalls > 0)
+        {
+            resultsText.text += System.Environment.NewLine + "Missed walls: " + statistics.MissedWalls;
+        }
+        else
+        {
+            resultsText.text += System.Environment.NewLine + "Missed walls: 0";
+        }
     }
 }

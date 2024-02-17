@@ -6,7 +6,7 @@ public class ClaimableMask : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject maskOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeMasksDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

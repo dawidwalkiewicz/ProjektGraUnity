@@ -6,7 +6,7 @@ public class ClaimableMeasureDevice : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject measureDeviceOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeArnamentDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

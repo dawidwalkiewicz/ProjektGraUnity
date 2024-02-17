@@ -35,7 +35,6 @@ public class GameDataManager : MonoBehaviour
     {
         timerScript.enabled = true;
         lifeText.text = "x " + livesLeft.ToString();
-        //bulletsText.text = magazineBulletsLeft.ToString() + "/" + totalBulletsLeft.ToString();
         background.enabled = false;
         gameOverText.enabled = false;
         statistics.NeutralizedDoorsCounter = 0;
@@ -56,12 +55,7 @@ public class GameDataManager : MonoBehaviour
 
     public void RemoveLife()
     {
-        /*if (!neutralizedDoors)
-        {
-            statistics.neutralizedDoorsCounter++;
-            statistics.unneutralizedDoorsCounter--;
-        }
-        else */if (livesLeft > 0 && neutralizedDoors)
+        if (livesLeft > 0 && neutralizedDoors)
         {
             dead = true;
             livesLeft--;
@@ -95,8 +89,9 @@ public class GameDataManager : MonoBehaviour
             }
             else
             {
-                //measureDevice.Update();
                 neutralizedDoors = true;
+                measureDevice.MeasureDoorValue();
+                statistics.WasMeasurementSet = true;
                 statistics.NeutralizedDoorsCounter++;
                 statistics.UnneutralizedDoorsCounter--;
                 ShootWalls();

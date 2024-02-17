@@ -6,7 +6,7 @@ public class ClaimableHelm : MonoBehaviour
 {
     public GameObject claimObjectText;
     public GameObject helmOnCharacter;
-    public WardrobeDoor wardrobeDoor;
+    public WardrobeClothesDoor wardrobeDoor;
     public bool isClaimed;
 
     private void Start()

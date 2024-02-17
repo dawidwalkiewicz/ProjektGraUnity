@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
+    readonly WeaponSystem weapon;
     public bool isWallHit = false;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        
+        WasWallHit();
+    }
+
+    public void WasWallHit()
+    {
+        if (weapon.damage == 1)
+        {
+            isWallHit = true;
+        }
     }
 }
