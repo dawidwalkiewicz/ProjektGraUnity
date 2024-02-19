@@ -10,18 +10,12 @@ public class RegulationRing : MonoBehaviour
     public KeyCode regulateMinusKey = KeyCode.Minus;
     public KeyCode regulatePlusKey = KeyCode.Plus;
 
-    private readonly HashSet<KeyCode> keysToCheck;
+    public HashSet<KeyCode> keysToCheck;
     int numberOfRegulationKeyPressed;
     public float speed = 30;
 
     public MeasureDevice measureDevice;
     public List<Door> doors;
-    //Animator _ringAnim;
-
-    void Start()
-    {
-        //_ringAnim = this.transform.parent.GetComponent<Animator>();
-    }
 
     void Update()
     {
@@ -31,7 +25,7 @@ public class RegulationRing : MonoBehaviour
 
     public void RegulateDoor(List<Door> doors)
     {
-        for (int i = 0; i <= doors.Count; i++)
+        for (int i = 0; i <= doors.Count - 1; i++)
         {
             numberOfRegulationKeyPressed = 0;
             if (doors[i].doorValue > 0)
@@ -55,7 +49,7 @@ public class RegulationRing : MonoBehaviour
     {
         if (numberOfRegulationKeyPressed != 0)
         {
-            for (int i = 0; i <= numberOfRegulationKeyPressed; i++)
+            for (int i = 1; i <= numberOfRegulationKeyPressed; i++)
             {
                 RegulateRingPlus();
                 numberOfRegulationKeyPressed--;
@@ -67,7 +61,7 @@ public class RegulationRing : MonoBehaviour
     {
         if (Input.GetKey(regulatePlusKey))
         {
-            transform.Rotate(Vector3.up * speed * Time.deltaTime);
+            transform.Rotate(speed * Time.deltaTime * Vector3.up);
         }
     }
 
@@ -75,7 +69,7 @@ public class RegulationRing : MonoBehaviour
     {
         if (Input.GetKey(regulatePlusKey))
         {
-            transform.Rotate(-Vector3.up * speed * Time.deltaTime);
+            transform.Rotate(speed * Time.deltaTime * -Vector3.up);
         }
     }
 }

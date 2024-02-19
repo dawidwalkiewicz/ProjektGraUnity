@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Ceiling : MonoBehaviour
 {
-    readonly WeaponSystem weapon;
+    public WeaponSystem weapon;
+    public Stats statistics;
     public bool isCeilingHit = false;
 
     void Update()
@@ -17,6 +18,12 @@ public class Ceiling : MonoBehaviour
         if (weapon.damage == 1)
         {
             isCeilingHit = true;
+            statistics.WallsCounter++;
+            statistics.MissedWalls--;
+        }
+        else if (weapon.damage > 1)
+        {
+            statistics.WallsHitMoreThanOnce++;
         }
     }
 }

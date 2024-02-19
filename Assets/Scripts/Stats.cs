@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -9,7 +7,6 @@ public class Stats : MonoBehaviour
     public int UnneutralizedDoorsCounter { get; set; }
     public int NeutralizedRoomsCounter { get; set; }
     public int WallsCounter { get; set; }
-    public int WallsHitOncePlusCounter { get; set; }
     public bool WasMeasurementSet { get; set; }
     public bool TooHighValue { get; set; }
     public bool TooLowValue { get; set; }

@@ -71,7 +71,7 @@ public class CustomBullet : MonoBehaviour
 
         collisions++;
 
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
+        if (collision.collider.CompareTag("Wall") && explodeOnTouch)
         {
             Explode();
         }
@@ -79,10 +79,12 @@ public class CustomBullet : MonoBehaviour
 
     private void Setup()
     {
-        physicsMaterial = new PhysicMaterial();
-        physicsMaterial.bounciness = bounciness;
-        physicsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
-        physicsMaterial.bounceCombine = PhysicMaterialCombine.Maximum;
+        physicsMaterial = new PhysicMaterial
+        {
+            bounciness = bounciness,
+            frictionCombine = PhysicMaterialCombine.Minimum,
+            bounceCombine = PhysicMaterialCombine.Maximum
+        };
         GetComponent<SphereCollider>().material = physicsMaterial;
 
         rb.useGravity = useGravity;

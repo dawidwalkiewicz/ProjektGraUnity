@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager instance;
     public Text lifeText;
     public Text gameOverText;
+    public TMP_Text timerText;
     public Image background;
     public bool dead = false;
     public bool neutralizedDoors = false;
@@ -30,9 +32,27 @@ public class GameDataManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        characterPosition = transform.position;
     }
     void Start()
     {
+        Door door1 = gameObject.AddComponent<Door>();
+        door1.doorValue = Random.Range(0, 9);
+        Door door2 = gameObject.AddComponent<Door>();
+        door2.doorValue = Random.Range(0, 9);
+        Door door3 = gameObject.AddComponent<Door>();
+        door3.doorValue = Random.Range(0, 9);
+        Door door4 = gameObject.AddComponent<Door>();
+        door4.doorValue = Random.Range(0, 9);
+        Wall wall1 = gameObject.AddComponent<Wall>();
+        Wall wall2 = gameObject.AddComponent<Wall>();
+        ceiling = gameObject.AddComponent<Ceiling>();
+        doors.Add(door1);
+        doors.Add(door2);
+        doors.Add(door3);
+        doors.Add(door4);
+        walls.Add(wall1);
+        walls.Add(wall2);
         timerScript.enabled = true;
         lifeText.text = "x " + livesLeft.ToString();
         background.enabled = false;
@@ -60,8 +80,9 @@ public class GameDataManager : MonoBehaviour
             dead = true;
             livesLeft--;
             lifeText.text = "x " + livesLeft.ToString();
-            characterPosition = new Vector3(0f, 0f, 0f);
+            transform.position = characterPosition;
             dead = false;
+            tooCloseToTheDoor = false;
         }
         else
         {
@@ -70,16 +91,18 @@ public class GameDataManager : MonoBehaviour
             background.enabled = true;
             gameOverText.enabled = true;
             statistics.GameCompletionTime = timerScript.ToString();
+            Time.timeScale = 0;
             SceneManager.LoadScene("Phasis3");
         }
     }
 
     public void NeutralizeDoor()
     {
-        for (int i = 1; i <= doors.Count; i++)
+        for (int i = 0; i <= doors.Count - 1; i++)
         {
             if (doors[i].doorValue > 0 && distance <= 0.3)
             {
+                tooCloseToTheDoor = true;
                 doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
                 RemoveLife();
             }
@@ -94,6 +117,7 @@ public class GameDataManager : MonoBehaviour
                 statistics.WasMeasurementSet = true;
                 statistics.NeutralizedDoorsCounter++;
                 statistics.UnneutralizedDoorsCounter--;
+                //doors[i];
                 ShootWalls();
             }
         }
@@ -101,9 +125,18 @@ public class GameDataManager : MonoBehaviour
 
     public void ShootWalls()
     {
-        /*if (hitTarget.Wall == 1 && hitTarget.Ceiling == 1)
+        for (int i = 0; i <= walls.Count - 1; i++)
         {
-            doors[i].OnTriggerEnter(doors[i]);
-        }*/
+            walls[i].WasWallHit();
+        }
+        ceiling.WasCeilingHit();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Door") && collision.gameObject.layer.Equals("whatIsDoor"))
+        {
+            RemoveLife();
+        }
     }
 }

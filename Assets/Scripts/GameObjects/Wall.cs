@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    readonly WeaponSystem weapon;
+    public WeaponSystem weapon;
+    public Stats statistics;
     public bool isWallHit = false;
 
     void Update()
@@ -17,6 +18,12 @@ public class Wall : MonoBehaviour
         if (weapon.damage == 1)
         {
             isWallHit = true;
+            statistics.WallsCounter++;
+            statistics.MissedWalls--;
+        }
+        else if (weapon.damage > 1)
+        {
+            statistics.WallsHitMoreThanOnce++;
         }
     }
 }

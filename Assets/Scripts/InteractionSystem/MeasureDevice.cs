@@ -11,6 +11,13 @@ public class MeasureDevice : MonoBehaviour
     public List<Door> doors;
     public Text doorValueText;
 
+    public Vector3 measureDevicePosition;
+
+    void Awake()
+    {
+        measureDevicePosition = transform.position;
+    }
+
     void Update()
     {
         if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit rcHit))
@@ -26,11 +33,16 @@ public class MeasureDevice : MonoBehaviour
 
     public void MeasureDoorValue()
     {
-        for (int i = 0; i < doors.Count; i++)
+        for (int i = 0; i < doors.Count - 1; i++)
         {
-            if (Input.GetKey(measureKey))
+            if (Input.GetKeyDown(measureKey))
             {
+                transform.position = new Vector3(0.7f, 0.1f, 0.1f);
                 doorValueText.text = "Door value: " + doors[i].doorValue;
+            }
+            else if (Input.GetKeyUp(measureKey))
+            {
+                transform.position = measureDevicePosition;
             }
         }
     }
