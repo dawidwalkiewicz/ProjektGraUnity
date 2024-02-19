@@ -24,7 +24,7 @@ public class GameDataManager : MonoBehaviour
     public RaycastHit rcHit;
     float distance;
 
-    int livesLeft = 3;
+    public CharacterHealth charHealth;
     public List<Door> doors;
     public List<Wall> walls;
     public Ceiling ceiling;
@@ -32,7 +32,7 @@ public class GameDataManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        characterPosition = transform.position;
+        characterPosition = new Vector3(-3f, 0f, 10f);
     }
     void Start()
     {
@@ -54,7 +54,7 @@ public class GameDataManager : MonoBehaviour
         walls.Add(wall1);
         walls.Add(wall2);
         timerScript.enabled = true;
-        lifeText.text = "x " + livesLeft.ToString();
+        lifeText.text = "x " + charHealth.health.ToString();
         background.enabled = false;
         gameOverText.enabled = false;
         statistics.NeutralizedDoorsCounter = 0;
@@ -75,12 +75,10 @@ public class GameDataManager : MonoBehaviour
 
     public void RemoveLife()
     {
-        if (livesLeft > 0 && neutralizedDoors)
+        if (charHealth.health > 0 && neutralizedDoors)
         {
             dead = true;
-            livesLeft--;
-            lifeText.text = "x " + livesLeft.ToString();
-            transform.position = characterPosition;
+            lifeText.text = "x " + charHealth.health.ToString();
             dead = false;
             tooCloseToTheDoor = false;
         }
@@ -96,17 +94,17 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    public void NeutralizeDoor()
+    void NeutralizeDoor()
     {
         for (int i = 0; i <= doors.Count - 1; i++)
         {
-            if (doors[i].doorValue > 0 && distance <= 0.3)
+            if (doors[i].doorValue > 0)
             {
                 tooCloseToTheDoor = true;
                 doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
                 RemoveLife();
             }
-            else if (doors[i].doorValue > 0 && distance <= 3.5 && distance > 0.3)
+            else if (doors[i].doorValue > 0 && distance <= 3.5 && distance > 1)
             {
                 regulationRing.RegulateDoor(doors);
             }
@@ -117,13 +115,13 @@ public class GameDataManager : MonoBehaviour
                 statistics.WasMeasurementSet = true;
                 statistics.NeutralizedDoorsCounter++;
                 statistics.UnneutralizedDoorsCounter--;
-                //doors[i];
+                doors[i].transform.position += new Vector3(0f, 10f, 0f);
                 ShootWalls();
             }
         }
     }
 
-    public void ShootWalls()
+    void ShootWalls()
     {
         for (int i = 0; i <= walls.Count - 1; i++)
         {

@@ -1,27 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;
     public int doorValue;
-    //public GameDataManager gdManager;
-    Animator _doorAnim;
+    public int damage = 1;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        _doorAnim.SetBool("isOpening", true);
-    }
+    public CharacterHealth characterHealth;
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        _doorAnim.SetBool("isOpening", false);
-    }
-
-    void Start()
-    {
-        _doorAnim = this.transform.parent.GetComponent<Animator>();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            characterHealth.TakeDamage(damage);
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        }
     }
 }
