@@ -12,7 +12,9 @@ public class MeasureDevice : MonoBehaviour
     public List<Door> doors;
 
     public Transform measureDevicePosition;
+    //public Transform newMeasureDevicePosition;
     public GameDataManager gdManager;
+    
 
     void Awake()
     {
@@ -23,7 +25,7 @@ public class MeasureDevice : MonoBehaviour
     {
         doorValueText.enabled = false;
         doors = new List<Door>();
-        for (int i = 0; i <= gdManager.doors.Count - 1; i++)
+        for (int i = 0; i < gdManager.doors.Count; i++)
         {
             doors.Add(gdManager.doors[i]);
         }
@@ -36,19 +38,31 @@ public class MeasureDevice : MonoBehaviour
 
     public void MeasureDoorValue()
     {
-        for (int i = 0; i < doors.Count - 1; i++)
+        for (int i = 0; i < doors.Count; i++)
         {
-            if (Input.GetKeyDown(measureKey))
+            if (doors[i] != null)
             {
-                doorValueText.enabled = true;
-                transform.position = new Vector3(0.7f, 0.1f, 0.1f);
-                doorValueText.text = "Door value: " + doors[i].doorValue;
+                if (Input.GetKeyDown(measureKey))
+                {
+                    doorValueText.enabled = true;
+                    doorValueText.text = "Door value: " + doors[i].doorValue;
+                    //transform.position = newMeasureDevicePosition.position;
+                }
+                else if (Input.GetKeyUp(measureKey))
+                {
+                    doorValueText.enabled = false;
+                    //transform.position = measureDevicePosition.position;
+                }
             }
-            else if (Input.GetKeyUp(measureKey))
-            {
-                transform.position = measureDevicePosition.position;
-                doorValueText.enabled = false;
-            }
+        }
+    }
+
+    public void UpdateTextAndValue(int index, int newValue)
+    {
+        if (index >= 0 && index < doors.Count)
+        {
+            doors[index].doorValue = newValue;
+            doorValueText.text = "Door value: " + doors[index].doorValue.ToString();
         }
     }
 }

@@ -20,7 +20,7 @@ public class CamShake : MonoBehaviour
         OriginalPos = transform.position;
         OriginalRot = transform.rotation;
 
-        StartCoroutine("ProcessShake");
+        _ = StartCoroutine(nameof(ProcessShake));
     }
 
     IEnumerator ProcessShake()

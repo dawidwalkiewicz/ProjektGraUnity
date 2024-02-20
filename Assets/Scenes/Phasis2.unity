@@ -123,6 +123,61 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &13481584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13481586}
+  - component: {fileID: 13481585}
+  m_Layer: 0
+  m_Name: GameDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &13481585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13481584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb544bbc5e2b73f409a36b0df43dcf4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neutralizeKey: 110
+  statistics: {fileID: 1704350180}
+  regulationRing: {fileID: 90985350}
+  dead: 0
+  neutralizedDoors: 0
+  tooCloseToTheDoor: 0
+  characterPosition: {x: 0, y: 0, z: 0}
+  charHealth: {fileID: 936055950}
+  doors: []
+  walls: []
+  ceiling: {fileID: 0}
+--- !u!4 &13481586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13481584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &23462700
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +190,6 @@ GameObject:
   - component: {fileID: 23462703}
   - component: {fileID: 23462702}
   - component: {fileID: 23462701}
-  - component: {fileID: 23462705}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -229,28 +283,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &23462705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23462700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb544bbc5e2b73f409a36b0df43dcf4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics: {fileID: 1704350180}
-  regulationRing: {fileID: 90985350}
-  dead: 0
-  neutralizedDoors: 0
-  tooCloseToTheDoor: 0
-  characterPosition: {x: 0, y: 0, z: 0}
-  charHealth: {fileID: 936055950}
-  doors: []
-  walls: []
-  ceiling: {fileID: 1719092466}
 --- !u!1 &84673671
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,13 +510,9 @@ MonoBehaviour:
   regulateMinusKey: 45
   regulatePlusKey: 43
   speed: 30
-  gdManager: {fileID: 0}
+  gdManager: {fileID: 13481585}
   measureDevice: {fileID: 2047784192}
-  doors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  doors: []
 --- !u!1 &114505231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,6 +2087,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 936055949}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &668089221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668089222}
+  m_Layer: 6
+  m_Name: NewDevicePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &668089222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668089221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: 0, z: -1.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2047784189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &702310676
 GameObject:
@@ -4801,6 +4860,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 702310677}
+  - {fileID: 668089222}
   - {fileID: 861299737}
   - {fileID: 1638885564}
   - {fileID: 1410901499}
@@ -4830,7 +4890,8 @@ MonoBehaviour:
   doorValueText: {fileID: 1591665470}
   doors: []
   measureDevicePosition: {fileID: 702310677}
-  gdManager: {fileID: 23462705}
+  newMeasureDevicePosition: {fileID: 668089222}
+  gdManager: {fileID: 13481585}
 --- !u!850595691 &2057906890
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -5119,3 +5180,4 @@ SceneRoots:
   - {fileID: 7611487688628429903}
   - {fileID: 1704350179}
   - {fileID: 114505232}
+  - {fileID: 13481586}

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class RegulationRing : MonoBehaviour
@@ -21,11 +20,11 @@ public class RegulationRing : MonoBehaviour
     void Start()
     {
         doors = new List<Door>();
-        measureDevice = gameObject.AddComponent<MeasureDevice>();
-        for (int i = 0; i <= gdManager.doors.Count - 1; i++)
+        for (int i = 0; i < gdManager.doors.Count; i++)
         {
             doors.Add(gdManager.doors[i]);
         }
+        measureDevice.gdManager = gdManager;
     }
 
     void Update()
@@ -36,35 +35,21 @@ public class RegulationRing : MonoBehaviour
 
     public void RegulateDoor(List<Door> doors)
     {
-        for (int i = 0; i <= doors.Count - 1; i++)
+        for (int i = 0; i < doors.Count; i++)
         {
-            numberOfRegulationKeyPressed = 0;
-            if (doors[i].doorValue > 0)
+            if (doors[i] != null)
             {
-                numberOfRegulationKeyPressed = keysToCheck.Count(key => Input.GetKey(regulateMinusKey));
-                for (int j = 0; j <= numberOfRegulationKeyPressed; j++)
-                {
-                    doors[i].doorValue--;
-                    measureDevice.doorValueText.text = "Door value: " + doors[i].doorValue;
-                }
-            }
-            else if (doors[i].doorValue == 0)
-            {
-                measureDevice.MeasureDoorValue();
-                measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
+                RegulateRingMinus(doors[i].doorValue);
             }
         }
     }
 
     public void ResetRingSetting()
     {
-        if (numberOfRegulationKeyPressed != 0)
+        while (numberOfRegulationKeyPressed > 0)
         {
-            for (int i = 1; i <= numberOfRegulationKeyPressed; i++)
-            {
-                RegulateRingPlus();
-                numberOfRegulationKeyPressed--;
-            }
+            RegulateRingPlus();
+            numberOfRegulationKeyPressed--;
         }
     }
 
@@ -73,14 +58,32 @@ public class RegulationRing : MonoBehaviour
         if (Input.GetKey(regulatePlusKey))
         {
             transform.Rotate(speed * Time.deltaTime * Vector3.up);
+            if (numberOfRegulationKeyPressed > 0)
+            {
+                numberOfRegulationKeyPressed--;
+            }
         }
     }
 
-    public void RegulateRingMinus()
+    public void RegulateRingMinus(int index)
     {
-        if (Input.GetKey(regulatePlusKey))
+        for (int i = 0; i < doors.Count; i++)
         {
-            transform.Rotate(speed * Time.deltaTime * -Vector3.up);
+            if (doors[i] != null)
+            {
+                if (doors[i].doorValue > 0 && Input.GetKey(regulateMinusKey))
+                {
+                    transform.Rotate(speed * Time.deltaTime * -Vector3.up);
+                    measureDevice.UpdateTextAndValue(i, doors[i].doorValue--);
+                }
+                else if (doors[i].doorValue == 0)
+                {
+                    measureDevice.MeasureDoorValue();
+                    measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
+                    gdManager.statistics.NeutralizedDoorsCounter++;
+                    gdManager.statistics.UnneutralizedDoorsCounter--;
+                }
+            }
         }
     }
 }

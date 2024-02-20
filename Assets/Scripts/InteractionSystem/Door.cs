@@ -4,10 +4,9 @@ using UnityEngine.TextCore.Text;
 
 public class Door : MonoBehaviour
 {
-    /*[SerializeField] private string prompt;
-    public string InteractionPrompt => prompt;*/
     public int doorValue;
     public int damage = 1;
+    public bool IsNeutralized { get; set; }
     public GameObject character;
     public Transform respawnPoint;
 

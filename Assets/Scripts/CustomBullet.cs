@@ -46,7 +46,9 @@ public class CustomBullet : MonoBehaviour
     {
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
-        Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+        Collider[] enemies = Physics.OverlapSphere(transform.position,
+                                                   explosionRange,
+                                                   whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
             if (enemies[i].GetComponent<Rigidbody>())
