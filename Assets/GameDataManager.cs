@@ -6,17 +6,10 @@ using UnityEngine.UI;
 
 public class GameDataManager : MonoBehaviour
 {
-    public FinalResultsScreen finalResultsScreen;
-    public TimerScript timerScript;
     public Stats statistics;
     public RegulationRing regulationRing;
-    public MeasureDevice measureDevice;
 
     public static GameDataManager instance;
-    public Text lifeText;
-    public Text gameOverText;
-    public TMP_Text timerText;
-    public Image background;
     public bool dead = false;
     public bool neutralizedDoors = false;
     public bool tooCloseToTheDoor = false;
@@ -29,11 +22,15 @@ public class GameDataManager : MonoBehaviour
     public List<Wall> walls;
     public Ceiling ceiling;
 
-    private void Awake()
+    void Awake()
     {
         instance = this;
+        doors = new List<Door>();
+        walls = new List<Wall>();
+        statistics = gameObject.AddComponent<Stats>();
         characterPosition = new Vector3(-3f, 0f, 10f);
     }
+
     void Start()
     {
         Door door1 = gameObject.AddComponent<Door>();
@@ -53,10 +50,6 @@ public class GameDataManager : MonoBehaviour
         doors.Add(door4);
         walls.Add(wall1);
         walls.Add(wall2);
-        timerScript.enabled = true;
-        lifeText.text = "x " + charHealth.health.ToString();
-        background.enabled = false;
-        gameOverText.enabled = false;
         statistics.NeutralizedDoorsCounter = 0;
         statistics.UnneutralizedDoorsCounter = 4;
         statistics.NeutralizedRoomsCounter = 0;
@@ -70,28 +63,6 @@ public class GameDataManager : MonoBehaviour
             distance = rcHit.distance;
         }
         NeutralizeDoor();
-        return;
-    }
-
-    public void RemoveLife()
-    {
-        if (charHealth.health > 0 && neutralizedDoors)
-        {
-            dead = true;
-            lifeText.text = "x " + charHealth.health.ToString();
-            dead = false;
-            tooCloseToTheDoor = false;
-        }
-        else
-        {
-            dead = true;
-            timerScript.enabled = false;
-            background.enabled = true;
-            gameOverText.enabled = true;
-            statistics.GameCompletionTime = timerScript.ToString();
-            Time.timeScale = 0;
-            SceneManager.LoadScene("Phasis3");
-        }
     }
 
     void NeutralizeDoor()
@@ -102,7 +73,6 @@ public class GameDataManager : MonoBehaviour
             {
                 tooCloseToTheDoor = true;
                 doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
-                RemoveLife();
             }
             else if (doors[i].doorValue > 0 && distance <= 3.5 && distance > 1)
             {
@@ -111,7 +81,6 @@ public class GameDataManager : MonoBehaviour
             else
             {
                 neutralizedDoors = true;
-                measureDevice.MeasureDoorValue();
                 statistics.WasMeasurementSet = true;
                 statistics.NeutralizedDoorsCounter++;
                 statistics.UnneutralizedDoorsCounter--;
@@ -134,7 +103,7 @@ public class GameDataManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Door") && collision.gameObject.layer.Equals("whatIsDoor"))
         {
-            RemoveLife();
+            charHealth.TakeDamage(1);
         }
     }
 }

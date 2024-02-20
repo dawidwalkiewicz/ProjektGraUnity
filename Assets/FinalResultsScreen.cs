@@ -9,9 +9,11 @@ public class FinalResultsScreen : MonoBehaviour
     public Text resultsText;
     public GameObject tryAgainButton;
     public Stats statistics;
+    public GameDataManager gdManager;
 
     void Start()
     {
+        statistics = gameObject.AddComponent<Stats>();
         tryAgainButton.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -19,6 +21,7 @@ public class FinalResultsScreen : MonoBehaviour
 
     void Update()
     {
+        SetStatistics();
         Setup();
     }
 
@@ -52,5 +55,18 @@ public class FinalResultsScreen : MonoBehaviour
         {
             resultsText.text += System.Environment.NewLine + "Missed walls: 0";
         }
+    }
+
+    void SetStatistics()
+    {
+        statistics.GameCompletionTime = gdManager.statistics.GameCompletionTime;
+        statistics.NeutralizedDoorsCounter = gdManager.statistics.NeutralizedDoorsCounter;
+        statistics.UnneutralizedDoorsCounter = gdManager.statistics.UnneutralizedDoorsCounter;
+        statistics.NeutralizedRoomsCounter = gdManager.statistics.NeutralizedDoorsCounter;
+        statistics.WasMeasurementSet = gdManager.statistics.WasMeasurementSet;
+        statistics.TooHighValue = gdManager.statistics.TooHighValue;
+        statistics.TooLowValue = gdManager.statistics.TooLowValue;
+        statistics.WrongRingSettings = gdManager.statistics.WrongRingSettings;
+        statistics.MissedWalls = gdManager.statistics.MissedWalls;
     }
 }

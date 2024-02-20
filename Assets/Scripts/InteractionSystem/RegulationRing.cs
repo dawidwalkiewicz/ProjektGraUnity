@@ -14,8 +14,19 @@ public class RegulationRing : MonoBehaviour
     int numberOfRegulationKeyPressed;
     public float speed = 30;
 
+    public GameDataManager gdManager;
     public MeasureDevice measureDevice;
     public List<Door> doors;
+
+    void Start()
+    {
+        doors = new List<Door>();
+        measureDevice = gameObject.AddComponent<MeasureDevice>();
+        for (int i = 0; i <= gdManager.doors.Count - 1; i++)
+        {
+            doors.Add(gdManager.doors[i]);
+        }
+    }
 
     void Update()
     {

@@ -717,6 +717,7 @@ MonoBehaviour:
   resultsText: {fileID: 2138688832}
   tryAgainButton: {fileID: 9767155}
   statistics: {fileID: 1177382268}
+  gdManager: {fileID: 0}
 --- !u!1 &546036177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1501,7 @@ MonoBehaviour:
   resultsText: {fileID: 2138688832}
   tryAgainButton: {fileID: 9767155}
   statistics: {fileID: 0}
+  gdManager: {fileID: 0}
 --- !u!1001 &2015274060
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,6 +8,12 @@ public class Ceiling : MonoBehaviour
     public Stats statistics;
     public bool isCeilingHit = false;
 
+    void Start()
+    {
+        weapon = gameObject.AddComponent<WeaponSystem>();
+        statistics = gameObject.AddComponent<Stats>();
+    }
+
     void Update()
     {
         WasCeilingHit();

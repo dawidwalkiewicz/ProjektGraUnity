@@ -8,27 +8,30 @@ public class MeasureDevice : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode measureKey = KeyCode.M;
 
-    public List<Door> doors;
     public Text doorValueText;
+    public List<Door> doors;
 
-    public Vector3 measureDevicePosition;
+    public Transform measureDevicePosition;
+    public GameDataManager gdManager;
 
     void Awake()
     {
-        measureDevicePosition = transform.position;
+        transform.position = measureDevicePosition.position;
+    }
+
+    void Start()
+    {
+        doorValueText.enabled = false;
+        doors = new List<Door>();
+        for (int i = 0; i <= gdManager.doors.Count - 1; i++)
+        {
+            doors.Add(gdManager.doors[i]);
+        }
     }
 
     void Update()
     {
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit rcHit))
-        {
-            float distance = rcHit.distance;
-
-            if (distance <= 3.5 && distance > 0.3)
-            {
-                MeasureDoorValue();
-            }
-        }
+        MeasureDoorValue();
     }
 
     public void MeasureDoorValue()
@@ -37,12 +40,14 @@ public class MeasureDevice : MonoBehaviour
         {
             if (Input.GetKeyDown(measureKey))
             {
+                doorValueText.enabled = true;
                 transform.position = new Vector3(0.7f, 0.1f, 0.1f);
                 doorValueText.text = "Door value: " + doors[i].doorValue;
             }
             else if (Input.GetKeyUp(measureKey))
             {
-                transform.position = measureDevicePosition;
+                transform.position = measureDevicePosition.position;
+                doorValueText.enabled = false;
             }
         }
     }

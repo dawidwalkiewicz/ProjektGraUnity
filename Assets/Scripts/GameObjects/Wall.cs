@@ -8,6 +8,12 @@ public class Wall : MonoBehaviour
     public Stats statistics;
     public bool isWallHit = false;
 
+    void Start()
+    {
+        weapon = gameObject.AddComponent<WeaponSystem>();
+        statistics = gameObject.AddComponent<Stats>();
+    }
+
     void Update()
     {
         WasWallHit();
