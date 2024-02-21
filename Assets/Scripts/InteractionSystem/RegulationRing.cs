@@ -14,6 +14,7 @@ public class RegulationRing : MonoBehaviour
     public float speed = 30;
 
     public GameDataManager gdManager;
+    public Stats statistics;
     public MeasureDevice measureDevice;
     public List<Door> doors;
 
@@ -39,50 +40,50 @@ public class RegulationRing : MonoBehaviour
         {
             if (doors[i] != null)
             {
-                RegulateRingMinus(doors[i].doorValue);
+                RegulateRingMinus(doors[i]);
             }
         }
     }
 
     public void ResetRingSetting()
     {
-        while (numberOfRegulationKeyPressed > 0)
+        foreach (var door in doors)
         {
-            RegulateRingPlus();
-            numberOfRegulationKeyPressed--;
-        }
-    }
-
-    public void RegulateRingPlus()
-    {
-        if (Input.GetKey(regulatePlusKey))
-        {
-            transform.Rotate(speed * Time.deltaTime * Vector3.up);
-            if (numberOfRegulationKeyPressed > 0)
+            while (numberOfRegulationKeyPressed > 0)
             {
+                RegulateRingPlus(door);
                 numberOfRegulationKeyPressed--;
             }
         }
     }
 
-    public void RegulateRingMinus(int index)
+    public void RegulateRingPlus(Door door)
     {
-        for (int i = 0; i < doors.Count; i++)
+        if (door != null && Input.GetKey(regulatePlusKey))
         {
-            if (doors[i] != null)
+            transform.Rotate(speed * Time.deltaTime * Vector3.up);
+            if (door.doorValue < door.maxValue)
             {
-                if (doors[i].doorValue > 0 && Input.GetKey(regulateMinusKey))
-                {
-                    transform.Rotate(speed * Time.deltaTime * -Vector3.up);
-                    measureDevice.UpdateTextAndValue(i, doors[i].doorValue--);
-                }
-                else if (doors[i].doorValue == 0)
-                {
-                    measureDevice.MeasureDoorValue();
-                    measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
-                    gdManager.statistics.NeutralizedDoorsCounter++;
-                    gdManager.statistics.UnneutralizedDoorsCounter--;
-                }
+                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue++);
+            }
+        }
+    }
+
+    public void RegulateRingMinus(Door door)
+    {
+        if (door != null)
+        {
+            if (door.doorValue > 0 && Input.GetKey(regulateMinusKey))
+            {
+                transform.Rotate(speed * Time.deltaTime * -Vector3.up);
+                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue--);
+            }
+            else if (door.doorValue == 0)
+            {
+                measureDevice.MeasureDoorValue();
+                measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
+                statistics.NeutralizedDoorsCounter++;
+                statistics.UnneutralizedDoorsCounter--;
             }
         }
     }

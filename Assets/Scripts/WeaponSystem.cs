@@ -20,11 +20,21 @@ public class WeaponSystem : MonoBehaviour
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public Text text;
+    public Wall wall;
+    public Ceiling ceiling;
+    private int wallHitCount;
+    private int ceilingHitCount;
 
     private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+    }
+
+    void Start()
+    {
+        wallHitCount = 0;
+        ceilingHitCount = 0;
     }
 
     private void Update()
@@ -63,9 +73,34 @@ public class WeaponSystem : MonoBehaviour
             Debug.Log(rayHit.collider.name);
             Target target = rayHit.transform.GetComponent<Target>();
 
-            if (target != null && rayHit.collider.CompareTag("Wall"))
+            if (target != null)
             {
                 target.TakeDamage(damage);
+
+                if (rayHit.collider.CompareTag("Wall"))
+                {
+                    wallHitCount++;
+                    if (wallHitCount == 1)
+                    {
+                        Debug.Log("Wall was hit once.");
+                    }
+                    else if (wallHitCount > 1)
+                    {
+                        Debug.Log("Wall was hit more than once.");
+                    }
+                }
+                else if (rayHit.collider.CompareTag("Ceiling"))
+                {
+                    ceilingHitCount++;
+                    if (ceilingHitCount == 1)
+                    {
+                        Debug.Log("Ceiling was hit once.");
+                    }
+                    else if (ceilingHitCount > 1)
+                    {
+                        Debug.Log("Ceiling was hit more than once.");
+                    }
+                }
             }
         }
         camShake.DoShake();

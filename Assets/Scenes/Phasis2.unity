@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 13481585}
   m_Layer: 0
   m_Name: GameDataManager
-  m_TagString: Untagged
+  m_TagString: GameDataManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,17 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb544bbc5e2b73f409a36b0df43dcf4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neutralizeKey: 110
-  statistics: {fileID: 1704350180}
-  regulationRing: {fileID: 90985350}
-  dead: 0
-  neutralizedDoors: 0
-  tooCloseToTheDoor: 0
-  characterPosition: {x: 0, y: 0, z: 0}
   charHealth: {fileID: 936055950}
   doors: []
   walls: []
-  ceiling: {fileID: 0}
+  ceiling: {fileID: 1719092466}
 --- !u!4 &13481586
 Transform:
   m_ObjectHideFlags: 0
@@ -511,6 +504,7 @@ MonoBehaviour:
   regulatePlusKey: 43
   speed: 30
   gdManager: {fileID: 13481585}
+  statistics: {fileID: 1704350180}
   measureDevice: {fileID: 2047784192}
   doors: []
 --- !u!1 &114505231
@@ -1690,7 +1684,7 @@ MonoBehaviour:
     m_Bits: 1024
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
     type: 3}
-  bulletHoleGraphic: {fileID: 0}
+  bulletHoleGraphic: {fileID: 1079131270}
   camShake: {fileID: 0}
   camShakeMagnitude: 0
   camShakeDuration: 0
@@ -2087,37 +2081,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 936055949}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &668089221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 668089222}
-  m_Layer: 6
-  m_Name: NewDevicePosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &668089222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668089221}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: -1.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2047784189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &702310676
 GameObject:
@@ -2749,6 +2712,7 @@ MonoBehaviour:
   background: {fileID: 1516512791}
   timerScript: {fileID: 474671601}
   statistics: {fileID: 1704350180}
+  doors: []
 --- !u!1 &1035358990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2895,11 +2859,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867956df6555ea247a0aec95d014545e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neutralizeKey: 110
+  statistics: {fileID: 1704350180}
   doorValue: 0
+  maxValue: 9
   damage: 1
   character: {fileID: 936055946}
   respawnPoint: {fileID: 114505232}
+  characterPosition: {x: 0, y: 0, z: 0}
+  interactionDistance: 2
   characterHealth: {fileID: 936055950}
+  gdManager: {fileID: 13481585}
+  regulationRing: {fileID: 90985350}
+  tooCloseToTheDoor: 0
 --- !u!1 &1066488696
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,6 +2976,91 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 936055949}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1079131270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079131272}
+  - component: {fileID: 1079131271}
+  m_Layer: 0
+  m_Name: BulletDecal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1079131271
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079131270}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
+    type: 3}
+  m_Color: {r: 0.098039225, g: 0.098039225, b: 0.098039225, a: 1}
+  m_FlipX: 1
+  m_FlipY: 1
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1079131272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079131270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347378485
 GameObject:
@@ -3151,11 +3208,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867956df6555ea247a0aec95d014545e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neutralizeKey: 110
+  statistics: {fileID: 1704350180}
   doorValue: 0
+  maxValue: 9
   damage: 1
   character: {fileID: 936055946}
   respawnPoint: {fileID: 114505232}
+  characterPosition: {x: 0, y: 0, z: 0}
+  interactionDistance: 2
   characterHealth: {fileID: 936055950}
+  gdManager: {fileID: 13481585}
+  regulationRing: {fileID: 90985350}
+  tooCloseToTheDoor: 0
 --- !u!1 &1375023778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,11 +3830,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867956df6555ea247a0aec95d014545e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neutralizeKey: 110
+  statistics: {fileID: 1704350180}
   doorValue: 0
+  maxValue: 9
   damage: 1
   character: {fileID: 936055946}
   respawnPoint: {fileID: 114505232}
+  characterPosition: {x: 0, y: 0, z: 0}
+  interactionDistance: 2
   characterHealth: {fileID: 936055950}
+  gdManager: {fileID: 13481585}
+  regulationRing: {fileID: 90985350}
+  tooCloseToTheDoor: 0
 --- !u!1 &1638885563
 GameObject:
   m_ObjectHideFlags: 0
@@ -4020,7 +4093,7 @@ GameObject:
   - component: {fileID: 1719092466}
   m_Layer: 10
   m_Name: Ceiling
-  m_TagString: Wall
+  m_TagString: Ceiling
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4600,11 +4673,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867956df6555ea247a0aec95d014545e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neutralizeKey: 110
+  statistics: {fileID: 1704350180}
   doorValue: 0
+  maxValue: 9
   damage: 1
   character: {fileID: 936055946}
   respawnPoint: {fileID: 114505232}
+  characterPosition: {x: 0, y: 0, z: 0}
+  interactionDistance: 2
   characterHealth: {fileID: 936055950}
+  gdManager: {fileID: 13481585}
+  regulationRing: {fileID: 90985350}
+  tooCloseToTheDoor: 0
 --- !u!1 &2002221138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4860,7 +4941,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 702310677}
-  - {fileID: 668089222}
   - {fileID: 861299737}
   - {fileID: 1638885564}
   - {fileID: 1410901499}
@@ -4890,7 +4970,6 @@ MonoBehaviour:
   doorValueText: {fileID: 1591665470}
   doors: []
   measureDevicePosition: {fileID: 702310677}
-  newMeasureDevicePosition: {fileID: 668089222}
   gdManager: {fileID: 13481585}
 --- !u!850595691 &2057906890
 LightingSettings:
@@ -5181,3 +5260,4 @@ SceneRoots:
   - {fileID: 1704350179}
   - {fileID: 114505232}
   - {fileID: 13481586}
+  - {fileID: 1079131272}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ceiling : MonoBehaviour
@@ -7,28 +5,30 @@ public class Ceiling : MonoBehaviour
     public WeaponSystem weapon;
     public Stats statistics;
     public bool isCeilingHit = false;
+    private int bulletHitCount = 0;
 
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-        weapon = gameObject.AddComponent<WeaponSystem>();
-        statistics = gameObject.AddComponent<Stats>();
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            bulletHitCount++;
+            WasCeilingHit(collision);
+        }
     }
 
-    void Update()
+    public void WasCeilingHit(Collision collision)
     {
-        WasCeilingHit();
-    }
-
-    public void WasCeilingHit()
-    {
-        if (weapon.damage == 1)
+        if (bulletHitCount == 1)
         {
             isCeilingHit = true;
             statistics.WallsCounter++;
             statistics.MissedWalls--;
         }
-        else if (weapon.damage > 1)
+        else if (bulletHitCount > 1)
         {
+            isCeilingHit = true;
+            statistics.WallsCounter++;
+            statistics.MissedWalls--;
             statistics.WallsHitMoreThanOnce++;
         }
     }

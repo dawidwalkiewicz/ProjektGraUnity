@@ -12,9 +12,7 @@ public class MeasureDevice : MonoBehaviour
     public List<Door> doors;
 
     public Transform measureDevicePosition;
-    //public Transform newMeasureDevicePosition;
     public GameDataManager gdManager;
-    
 
     void Awake()
     {
@@ -27,7 +25,11 @@ public class MeasureDevice : MonoBehaviour
         doors = new List<Door>();
         for (int i = 0; i < gdManager.doors.Count; i++)
         {
-            doors.Add(gdManager.doors[i]);
+            Door door = gdManager.doors[i].GetComponent<Door>();
+            if (door != null)
+            {
+                doors.Add(door);
+            }
         }
     }
 
@@ -38,23 +40,35 @@ public class MeasureDevice : MonoBehaviour
 
     public void MeasureDoorValue()
     {
-        for (int i = 0; i < doors.Count; i++)
+        if (Input.GetKeyDown(measureKey))
         {
-            if (doors[i] != null)
+            doorValueText.enabled = true;
+            Door closestDoor = GetClosestDoor();
+            if (closestDoor != null)
             {
-                if (Input.GetKeyDown(measureKey))
-                {
-                    doorValueText.enabled = true;
-                    doorValueText.text = "Door value: " + doors[i].doorValue;
-                    //transform.position = newMeasureDevicePosition.position;
-                }
-                else if (Input.GetKeyUp(measureKey))
-                {
-                    doorValueText.enabled = false;
-                    //transform.position = measureDevicePosition.position;
-                }
+                doorValueText.text = "Door value: " + closestDoor.doorValue;
             }
         }
+        else if (Input.GetKeyUp(measureKey))
+        {
+            doorValueText.enabled = false;
+        }
+    }
+
+    private Door GetClosestDoor()
+    {
+        Door closestDoor = null;
+        float closestDistance = float.MaxValue;
+        foreach (Door door in doors)
+        {
+            float distance = Vector3.Distance(transform.position, door.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestDoor = door;
+            }
+        }
+        return closestDoor;
     }
 
     public void UpdateTextAndValue(int index, int newValue)

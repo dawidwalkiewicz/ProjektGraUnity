@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class CharacterHealth : MonoBehaviour
 {
     public int health;
-    public int maxHealth = 3;
+    public int maxHealth;
     public bool dead;
     public bool tooCloseToTheDoor;
     public Text lifeText;
@@ -15,12 +16,16 @@ public class CharacterHealth : MonoBehaviour
     public Image background;
     public TimerScript timerScript;
     public Stats statistics;
+    public List<Door> doors;
 
     void Start()
     {
         health = maxHealth;
         dead = false;
-        tooCloseToTheDoor = false;
+        for (int i = 0; i < doors.Count; i++)
+        {
+            tooCloseToTheDoor = doors[i].tooCloseToTheDoor;
+        }
         lifeText.text = "x " + health.ToString();
         background.enabled = false;
         gameOverText.enabled = false;
