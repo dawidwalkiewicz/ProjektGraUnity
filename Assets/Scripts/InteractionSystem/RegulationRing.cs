@@ -62,10 +62,10 @@ public class RegulationRing : MonoBehaviour
         if (door != null && Input.GetKey(regulatePlusKey))
         {
             transform.Rotate(speed * Time.deltaTime * Vector3.up);
-            if (door.doorValue < door.maxValue)
+            /*if (door.doorValue < door.maxValue)
             {
                 measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue++);
-            }
+            }*/
         }
     }
 
@@ -73,12 +73,12 @@ public class RegulationRing : MonoBehaviour
     {
         if (door != null)
         {
-            if (door.doorValue > 0 && Input.GetKey(regulateMinusKey))
+            if (door.doorValue > door.minValue && Input.GetKey(regulateMinusKey))
             {
                 transform.Rotate(speed * Time.deltaTime * -Vector3.up);
                 measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue--);
             }
-            else if (door.doorValue == 0)
+            else if (door.doorValue == door.minValue)
             {
                 measureDevice.MeasureDoorValue();
                 measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";

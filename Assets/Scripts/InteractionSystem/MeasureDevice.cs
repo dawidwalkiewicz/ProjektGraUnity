@@ -42,11 +42,15 @@ public class MeasureDevice : MonoBehaviour
     {
         if (Input.GetKeyDown(measureKey))
         {
-            doorValueText.enabled = true;
             Door closestDoor = GetClosestDoor();
             if (closestDoor != null)
             {
+                doorValueText.enabled = true;
                 doorValueText.text = "Door value: " + closestDoor.doorValue;
+            }
+            else
+            {
+                doorValueText.enabled = false;
             }
         }
         else if (Input.GetKeyUp(measureKey))

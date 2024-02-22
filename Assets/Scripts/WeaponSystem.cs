@@ -20,8 +20,8 @@ public class WeaponSystem : MonoBehaviour
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public Text text;
-    public Wall wall;
-    public Ceiling ceiling;
+    private Wall wall;
+    private Ceiling ceiling;
     private int wallHitCount;
     private int ceilingHitCount;
 

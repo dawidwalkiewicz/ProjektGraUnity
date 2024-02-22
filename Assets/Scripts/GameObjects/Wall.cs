@@ -7,6 +7,18 @@ public class Wall : MonoBehaviour
     public bool isWallHit = false;
     private int bulletHitCount = 0;
 
+    void Update()
+    {
+        if (weapon == null)
+        {
+            weapon = GameObject.Find("Weapon").GetComponent<WeaponSystem>();
+        }
+        if (statistics == null)
+        {
+            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))

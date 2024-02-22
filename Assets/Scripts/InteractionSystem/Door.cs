@@ -7,7 +7,10 @@ public class Door : MonoBehaviour
     public KeyCode neutralizeKey = KeyCode.N;
 
     public Stats statistics;
+    [SerializeField]
     public int doorValue;
+
+    public int minValue = 0;
     public int maxValue = 9;
     public int damage = 1;
     public bool IsNeutralized { get; set; }
@@ -18,12 +21,21 @@ public class Door : MonoBehaviour
     public float interactionDistance = 3.0f;
 
     public CharacterHealth characterHealth;
-    public GameDataManager gdManager;
+    private GameDataManager gdManager;
+    List<Door> doors;
     public RegulationRing regulationRing;
     public bool tooCloseToTheDoor;
 
     void Awake()
     {
+        if (statistics == null)
+        {
+            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+        }
+        if (gdManager == null)
+        {
+            gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
+        }
         characterPosition = new Vector3(-3f, 0f, 10f);
         statistics.NeutralizedDoorsCounter = 0;
         statistics.UnneutralizedDoorsCounter = 4;
@@ -33,8 +45,18 @@ public class Door : MonoBehaviour
 
     void Start()
     {
+        doors = gdManager.doors;
+        /*for (int i = 0; i < doors.Count; i++)
+        {
+            doorValue = doors[i].doorValue;
+        }*/
         tooCloseToTheDoor = false;
         IsNeutralized = false;
+    }
+
+    void Update()
+    {
+        NeutralizeDoor();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -46,7 +68,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void ChangeDoorPosition(int index)
+    private void ChangeDoorPosition(int index)
     {
         if (index >= 0 && index < gdManager.doors.Count)
         {
@@ -57,18 +79,18 @@ public class Door : MonoBehaviour
     public void NeutralizeDoor()
     {
         float distance = Vector3.Distance(character.transform.position, transform.position);
-        for (int i = 0; i < gdManager.doors.Count; i++)
+        for (int i = 0; i < doors.Count; i++)
         {
-            Door door = gdManager.doors[i].GetComponent<Door>();
+            Door door = doors[i];
             if (door != null && distance <= interactionDistance)
             {
-                if (door.doorValue > 0)
+                if (door.doorValue > minValue)
                 {
                     tooCloseToTheDoor = true;
-                    gdManager.doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
+                    doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
                     regulationRing.RegulateDoor(gdManager.doors);
                 }
-                else if (door.doorValue == 0 && distance <= interactionDistance && Input.GetKey(neutralizeKey))
+                else if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKey(neutralizeKey))
                 {
                     door.IsNeutralized = true;
                     statistics.WasMeasurementSet = true;

@@ -153,6 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charHealth: {fileID: 936055950}
+  character: {fileID: 936055946}
+  respawnPoint: {fileID: 114505232}
+  regulationRing: {fileID: 90985350}
+  statistics: {fileID: 1704350180}
   doors: []
   walls: []
   ceiling: {fileID: 1719092466}
@@ -2860,17 +2864,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 1704350180}
+  statistics: {fileID: 0}
   doorValue: 0
   maxValue: 9
   damage: 1
-  character: {fileID: 936055946}
-  respawnPoint: {fileID: 114505232}
+  character: {fileID: 0}
+  respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   interactionDistance: 2
-  characterHealth: {fileID: 936055950}
-  gdManager: {fileID: 13481585}
-  regulationRing: {fileID: 90985350}
+  characterHealth: {fileID: 0}
+  regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1066488696
 GameObject:
@@ -3209,17 +3212,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 1704350180}
+  statistics: {fileID: 0}
   doorValue: 0
   maxValue: 9
   damage: 1
-  character: {fileID: 936055946}
-  respawnPoint: {fileID: 114505232}
+  character: {fileID: 0}
+  respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   interactionDistance: 2
-  characterHealth: {fileID: 936055950}
-  gdManager: {fileID: 13481585}
-  regulationRing: {fileID: 90985350}
+  characterHealth: {fileID: 0}
+  regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1375023778
 GameObject:
@@ -3831,17 +3833,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 1704350180}
+  statistics: {fileID: 0}
   doorValue: 0
   maxValue: 9
   damage: 1
-  character: {fileID: 936055946}
-  respawnPoint: {fileID: 114505232}
+  character: {fileID: 0}
+  respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   interactionDistance: 2
-  characterHealth: {fileID: 936055950}
-  gdManager: {fileID: 13481585}
-  regulationRing: {fileID: 90985350}
+  characterHealth: {fileID: 0}
+  regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1638885563
 GameObject:
@@ -4674,17 +4675,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 1704350180}
+  statistics: {fileID: 0}
   doorValue: 0
   maxValue: 9
   damage: 1
-  character: {fileID: 936055946}
-  respawnPoint: {fileID: 114505232}
+  character: {fileID: 0}
+  respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   interactionDistance: 2
-  characterHealth: {fileID: 936055950}
-  gdManager: {fileID: 13481585}
-  regulationRing: {fileID: 90985350}
+  characterHealth: {fileID: 0}
+  regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &2002221138
 GameObject:
