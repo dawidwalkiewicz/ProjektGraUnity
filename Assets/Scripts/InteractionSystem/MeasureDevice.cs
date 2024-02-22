@@ -59,10 +59,10 @@ public class MeasureDevice : MonoBehaviour
         }
     }
 
-    private Door GetClosestDoor()
+    public Door GetClosestDoor()
     {
         Door closestDoor = null;
-        float closestDistance = float.MaxValue;
+        float closestDistance = 10.0f;
         foreach (Door door in doors)
         {
             float distance = Vector3.Distance(transform.position, door.transform.position);
@@ -79,8 +79,15 @@ public class MeasureDevice : MonoBehaviour
     {
         if (index >= 0 && index < doors.Count)
         {
-            doors[index].doorValue = newValue;
-            doorValueText.text = "Door value: " + doors[index].doorValue.ToString();
+            newValue = doors[index].doorValue;
+            if (newValue == doors[index].minValue)
+            {
+                doorValueText.text = "Door value: " + newValue.ToString() + System.Environment.NewLine + "Door neutralized.";
+            }
+            else
+            {
+                doorValueText.text = "Door value: " + newValue.ToString();
+            }
         }
     }
 }

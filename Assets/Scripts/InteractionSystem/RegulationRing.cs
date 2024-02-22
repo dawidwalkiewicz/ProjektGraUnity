@@ -6,11 +6,12 @@ public class RegulationRing : MonoBehaviour
 {
     public float regulationMovement;
     [Header("Keybinds")]
-    public KeyCode regulateMinusKey = KeyCode.Minus;
-    public KeyCode regulatePlusKey = KeyCode.Plus;
+    public KeyCode regulateMinusKey = KeyCode.KeypadMinus;
+    public KeyCode regulatePlusKey = KeyCode.KeypadPlus;
 
     public HashSet<KeyCode> keysToCheck;
-    int numberOfRegulationKeyPressed;
+    public int numberOfRegulationKeyPressed = 0;
+    private int defualtNumberOfRegulationKeyPressed = 0;
     public float speed = 30;
 
     public GameDataManager gdManager;
@@ -21,67 +22,77 @@ public class RegulationRing : MonoBehaviour
     void Start()
     {
         doors = new List<Door>();
-        for (int i = 0; i < gdManager.doors.Count; i++)
+        if (gdManager != null && gdManager.doors != null)
         {
-            doors.Add(gdManager.doors[i]);
+            for (int i = 0; i < gdManager.doors.Count; i++)
+            {
+                doors.Add(gdManager.doors[i]);
+            }
         }
-        measureDevice.gdManager = gdManager;
+        if (measureDevice != null)
+        {
+            measureDevice.gdManager = gdManager;
+        }
     }
 
     void Update()
     {
-        RegulateDoor(doors);
-        ResetRingSetting();
-    }
-
-    public void RegulateDoor(List<Door> doors)
-    {
         for (int i = 0; i < doors.Count; i++)
         {
-            if (doors[i] != null)
-            {
-                RegulateRingMinus(doors[i]);
-            }
+            RegulateDoor(doors[i]);
         }
     }
 
-    public void ResetRingSetting()
+    public void RegulateDoor(Door door)
     {
-        foreach (var door in doors)
+        if (Input.GetKey(regulateMinusKey))
         {
-            while (numberOfRegulationKeyPressed > 0)
-            {
-                RegulateRingPlus(door);
-                numberOfRegulationKeyPressed--;
-            }
+            RegulateRingMinus();
+            numberOfRegulationKeyPressed++;
         }
-    }
-
-    public void RegulateRingPlus(Door door)
-    {
-        if (door != null && Input.GetKey(regulatePlusKey))
+        else if (Input.GetKey(regulatePlusKey))
         {
-            transform.Rotate(speed * Time.deltaTime * Vector3.up);
-            /*if (door.doorValue < door.maxValue)
-            {
-                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue++);
-            }*/
+            RegulateRingPlus();
+            numberOfRegulationKeyPressed--;
         }
     }
 
-    public void RegulateRingMinus(Door door)
+    public void IsRingReseted()
     {
+        if (numberOfRegulationKeyPressed == defualtNumberOfRegulationKeyPressed)
+        {
+            statistics.WrongRingSettings = false;
+        }
+        else
+        {
+            statistics.WrongRingSettings = true;
+        }
+    }
+
+    public void RegulateRingPlus()
+    {
+        Door door = measureDevice.GetClosestDoor();
         if (door != null)
         {
-            if (door.doorValue > door.minValue && Input.GetKey(regulateMinusKey))
+            transform.Rotate(speed * Time.deltaTime * Vector3.up);
+        }
+    }
+
+    public void RegulateRingMinus()
+    {
+        Door door = measureDevice.GetClosestDoor();
+        if (door != null)
+        {
+            if (door.doorValue > door.minValue)
             {
                 transform.Rotate(speed * Time.deltaTime * -Vector3.up);
-                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue--);
+                door.doorValue--;
+                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue);
             }
             else if (door.doorValue == door.minValue)
             {
                 measureDevice.MeasureDoorValue();
-                measureDevice.doorValueText.text = "Door value: 0" + System.Environment.NewLine + "Door neutralized.";
+                measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue);
                 statistics.NeutralizedDoorsCounter++;
                 statistics.UnneutralizedDoorsCounter--;
             }

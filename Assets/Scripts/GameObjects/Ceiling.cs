@@ -4,6 +4,7 @@ public class Ceiling : MonoBehaviour
 {
     public WeaponSystem weapon;
     public Stats statistics;
+    public RegulationRing regulationRing;
     public bool isCeilingHit = false;
     private int bulletHitCount = 0;
 
@@ -16,6 +17,10 @@ public class Ceiling : MonoBehaviour
         if (statistics == null)
         {
             statistics = GameObject.Find("Stats").GetComponent<Stats>();
+        }
+        if (regulationRing == null)
+        {
+            regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
         }
     }
 

@@ -401,7 +401,7 @@ GameObject:
   m_Layer: 6
   m_Name: RegulationRing
   m_TagString: Player
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -506,6 +506,7 @@ MonoBehaviour:
   regulationMovement: 0
   regulateMinusKey: 45
   regulatePlusKey: 43
+  numberOfRegulationKeyPressed: 0
   speed: 30
   gdManager: {fileID: 13481585}
   statistics: {fileID: 1704350180}
@@ -1558,9 +1559,9 @@ MonoBehaviour:
   timeBetweenShooting: 0.1
   spread: 3
   reloadTime: 1.5
-  timeBetweenShots: 0
-  magazineSize: 30
-  bulletsPerTap: 270
+  timeBetweenShots: 1
+  magazineSize: 1
+  bulletsPerTap: 4
   allowButtonHold: 1
   playerRb: {fileID: 936055948}
   recoilForce: 0
@@ -1652,13 +1653,13 @@ Transform:
   m_GameObject: {fileID: 491415795}
   serializedVersion: 2
   m_LocalRotation: {x: 0.060543478, y: -0.06269464, z: -0.692015, w: 0.71660256}
-  m_LocalPosition: {x: 0.8, y: 0.100000024, z: -0.4}
+  m_LocalPosition: {x: 0.79999995, y: 0.100000024, z: -0.4}
   m_LocalScale: {x: 0.10000003, y: 0.9, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 90985346}
   - {fileID: 84673672}
-  m_Father: {fileID: 518454630}
+  m_Father: {fileID: 936055949}
   m_LocalEulerAnglesHint: {x: 0, y: -10, z: -88}
 --- !u!114 &491415801
 MonoBehaviour:
@@ -1677,9 +1678,9 @@ MonoBehaviour:
   spread: 3
   range: 10
   reloadTime: 1.4
-  timeBetweenShots: 0
-  magazineSize: 30
-  bulletsPerTap: 270
+  timeBetweenShots: 1
+  magazineSize: 1
+  bulletsPerTap: 4
   allowButtonHold: 1
   fpsCam: {fileID: 518454632}
   attackPoint: {fileID: 84673672}
@@ -1810,6 +1811,7 @@ GameObject:
   - component: {fileID: 518454633}
   - component: {fileID: 518454632}
   - component: {fileID: 518454631}
+  - component: {fileID: 518454634}
   m_Layer: 0
   m_Name: CharacterCamera
   m_TagString: MainCamera
@@ -1829,8 +1831,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 491415800}
+  m_Children: []
   m_Father: {fileID: 2126031449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &518454631
@@ -1907,6 +1908,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518454629}
   m_Enabled: 1
+--- !u!114 &518454634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518454629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b63944b32904154bbdf8467a5e9cc3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 491415795}
 --- !u!1001 &662480657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2692,6 +2706,7 @@ Transform:
   - {fileID: 666712174}
   - {fileID: 430874759}
   - {fileID: 2047784189}
+  - {fileID: 491415800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &936055950
@@ -2866,6 +2881,7 @@ MonoBehaviour:
   neutralizeKey: 110
   statistics: {fileID: 0}
   doorValue: 0
+  minValue: 0
   maxValue: 9
   damage: 1
   character: {fileID: 0}
@@ -3214,6 +3230,7 @@ MonoBehaviour:
   neutralizeKey: 110
   statistics: {fileID: 0}
   doorValue: 0
+  minValue: 0
   maxValue: 9
   damage: 1
   character: {fileID: 0}
@@ -3371,6 +3388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
   statistics: {fileID: 1704350180}
+  regulationRing: {fileID: 0}
   isWallHit: 0
 --- !u!1 &1410901498
 GameObject:
@@ -3835,6 +3853,7 @@ MonoBehaviour:
   neutralizeKey: 110
   statistics: {fileID: 0}
   doorValue: 0
+  minValue: 0
   maxValue: 9
   damage: 1
   character: {fileID: 0}
@@ -4226,6 +4245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
   statistics: {fileID: 1704350180}
+  regulationRing: {fileID: 90985350}
   isCeilingHit: 0
 --- !u!1001 &1753402578
 PrefabInstance:
@@ -4677,6 +4697,7 @@ MonoBehaviour:
   neutralizeKey: 110
   statistics: {fileID: 0}
   doorValue: 0
+  minValue: 0
   maxValue: 9
   damage: 1
   character: {fileID: 0}
@@ -4834,6 +4855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
   statistics: {fileID: 1704350180}
+  regulationRing: {fileID: 0}
   isWallHit: 0
 --- !u!1 &2047784184
 GameObject:

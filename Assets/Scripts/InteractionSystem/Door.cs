@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     public Transform respawnPoint;
     public Vector3 characterPosition;
     public RaycastHit rcHit;
-    public float interactionDistance = 3.0f;
+    public float interactionDistance = 1.0f;
 
     public CharacterHealth characterHealth;
     private GameDataManager gdManager;
@@ -40,16 +40,11 @@ public class Door : MonoBehaviour
         statistics.NeutralizedDoorsCounter = 0;
         statistics.UnneutralizedDoorsCounter = 4;
         statistics.NeutralizedRoomsCounter = 0;
-        statistics.MissedWalls = 3;
     }
 
     void Start()
     {
         doors = gdManager.doors;
-        /*for (int i = 0; i < doors.Count; i++)
-        {
-            doorValue = doors[i].doorValue;
-        }*/
         tooCloseToTheDoor = false;
         IsNeutralized = false;
     }
@@ -82,13 +77,13 @@ public class Door : MonoBehaviour
         for (int i = 0; i < doors.Count; i++)
         {
             Door door = doors[i];
-            if (door != null && distance <= interactionDistance)
+            if (door != null)
             {
-                if (door.doorValue > minValue)
+                if (door.doorValue > minValue && distance <= interactionDistance)
                 {
                     tooCloseToTheDoor = true;
                     doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
-                    regulationRing.RegulateDoor(gdManager.doors);
+                    regulationRing.RegulateDoor(door);
                 }
                 else if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKey(neutralizeKey))
                 {
@@ -97,9 +92,9 @@ public class Door : MonoBehaviour
                     statistics.NeutralizedDoorsCounter++;
                     statistics.UnneutralizedDoorsCounter--;
                     ChangeDoorPosition(i);
+                    statistics.NeutralizedRoomsCounter++;
                 }
             }
-            door.IsNeutralized = false;
         }
     }
 }
