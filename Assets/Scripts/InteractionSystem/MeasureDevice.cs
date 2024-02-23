@@ -21,15 +21,7 @@ public class MeasureDevice : MonoBehaviour
     void Start()
     {
         doorValueText.enabled = false;
-        doors = new List<Door>();
-        for (int i = 0; i < gdManager.doors.Count; i++)
-        {
-            Door door = gdManager.doors[i].GetComponent<Door>();
-            if (door != null)
-            {
-                doors.Add(door);
-            }
-        }
+        doors = gdManager.doors;
     }
 
     void Update()
@@ -45,7 +37,14 @@ public class MeasureDevice : MonoBehaviour
             if (closestDoor != null)
             {
                 doorValueText.enabled = true;
-                doorValueText.text = "Door value: " + closestDoor.doorValue;
+                if (closestDoor.doorValue == closestDoor.minValue)
+                {
+                    doorValueText.text = "Door value: " + closestDoor.doorValue + System.Environment.NewLine + "Door neutralized.";
+                }
+                else
+                {
+                    doorValueText.text = "Door value: " + closestDoor.doorValue;
+                }
             }
             else
             {
@@ -78,7 +77,7 @@ public class MeasureDevice : MonoBehaviour
     {
         if (index >= 0 && index < doors.Count)
         {
-            newValue = doors[index].doorValue;
+            doors[index].doorValue = newValue;
             if (newValue == doors[index].minValue)
             {
                 doorValueText.text = "Door value: " + newValue.ToString() + System.Environment.NewLine + "Door neutralized.";

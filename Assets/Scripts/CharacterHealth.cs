@@ -29,6 +29,7 @@ public class CharacterHealth : MonoBehaviour
 
     void Start()
     {
+        doors ??= new List<Door>();
         health = maxHealth;
         dead = false;
         for (int i = 0; i < doors.Count; i++)
@@ -46,20 +47,17 @@ public class CharacterHealth : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            Destroy(gameObject);
             dead = true;
             timerScript.enabled = false;
             background.enabled = true;
             gameOverText.enabled = true;
             statistics.GameCompletionTime = timerScript.ToString();
-            //Time.timeScale = 0;
+            Destroy(gameObject);
             SceneManager.LoadScene("Phasis3");
         }
         else
         {
-            dead = true;
             lifeText.text = "x " + health.ToString();
-            dead = false;
             tooCloseToTheDoor = false;
         }
     }

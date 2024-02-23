@@ -13,7 +13,10 @@ public class TimerScript : MonoBehaviour
 
     private void Awake()
     {
-        timerText = GetComponent<TMP_Text>();
+        if (!TryGetComponent<TMP_Text>(out timerText))
+        {
+            Debug.LogError("TimerText component is missing");
+        }
     }
 
     private void OnEnable()
@@ -40,7 +43,7 @@ public class TimerScript : MonoBehaviour
         {
             return;
         }
-        if (timerType == TimerType.Stopwatch && timeToDisplay > 300.0f)
+        if (timerType == TimerType.Stopwatch && timeToDisplay > 600.0f)
         {
             EventManager.OnTimerStop();
             return;

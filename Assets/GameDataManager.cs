@@ -13,6 +13,7 @@ public class GameDataManager : MonoBehaviour
     public List<Door> doors;
     public List<Wall> walls;
     public Ceiling ceiling;
+    MeasureDevice measureDevice;
 
     void Awake()
     {
@@ -24,6 +25,10 @@ public class GameDataManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+        if (measureDevice == null)
+        {
+            measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
         }
     }
 
@@ -75,9 +80,7 @@ public class GameDataManager : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < doors.Count; i++)
-        {
-            doors[i].NeutralizeDoor();
-        }
+        Door door = measureDevice.GetClosestDoor();
+        door.NeutralizeDoor();
     }
 }

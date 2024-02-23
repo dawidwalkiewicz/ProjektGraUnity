@@ -8,7 +8,6 @@ public class Door : MonoBehaviour
     public KeyCode neutralizeKey = KeyCode.N;
 
     public Stats statistics;
-    [SerializeField]
     public int doorValue;
 
     public int minValue = 0;
@@ -27,6 +26,7 @@ public class Door : MonoBehaviour
     MeasureDevice measureDevice;
     public bool tooCloseToTheDoor = false;
     private bool isFrozen = false;
+    private bool hasNeutralizeKeyBeenPressed = false;
     private Color defaultColor;
 
     void Awake()
@@ -92,32 +92,37 @@ public class Door : MonoBehaviour
 
     private void ChangeDoorPosition(int index)
     {
-        if (index >= 0 && index < gdManager.doors.Count)
+        if (index >= 0 && index < doors.Count)
         {
-            gdManager.doors[index].transform.position += new Vector3(0f, 10f, 0f);
+            doors[index].transform.position += new Vector3(0f, 10f, 0f);
         }
     }
 
     public void NeutralizeDoor()
     {
         float distance = Vector3.Distance(character.transform.position, transform.position);
-        Door door = measureDevice.GetClosestDoor();
         float interactionDistance = 10.0f;
-        if (door != null & !door.IsNeutralized)
+        Door door = measureDevice.GetClosestDoor();
+        if (door != null)
         {
-            if (door.doorValue > minValue && distance <= interactionDistance)
+            if (!door.IsNeutralized)
+            {
+                if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKeyDown(neutralizeKey) && !hasNeutralizeKeyBeenPressed)
+                {
+                    door.IsNeutralized = true;
+                    statistics.WasMeasurementSet = true;
+                    statistics.NeutralizedDoorsCounter++;
+                    statistics.UnneutralizedDoorsCounter--;
+                    int index = doors.IndexOf(door);
+                    ChangeDoorPosition(index);
+                    statistics.NeutralizedRoomsCounter++;
+                    hasNeutralizeKeyBeenPressed = true;
+                }
+            }
+            else if (door.IsNeutralized && distance <= interactionDistance && Input.GetKeyDown(regulationRing.regulatePlusKey))
             {
                 regulationRing.RegulateDoor(door);
-            }
-            else if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKeyDown(neutralizeKey))
-            {
-                door.IsNeutralized = true;
-                statistics.WasMeasurementSet = true;
-                statistics.NeutralizedDoorsCounter++;
-                statistics.UnneutralizedDoorsCounter--;
-                int index = doors.IndexOf(door);
-                ChangeDoorPosition(index);
-                statistics.NeutralizedRoomsCounter++;
+                hasNeutralizeKeyBeenPressed = false;
             }
         }
     }

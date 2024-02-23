@@ -11,7 +11,7 @@ public class RegulationRing : MonoBehaviour
 
     public HashSet<KeyCode> keysToCheck;
     public int numberOfRegulationKeyPressed = 0;
-    private int defualtNumberOfRegulationKeyPressed = 0;
+    private readonly int defaultNumberOfRegulationKeyPressed = 0;
     public float speed = 30;
 
     public GameDataManager gdManager;
@@ -25,6 +25,14 @@ public class RegulationRing : MonoBehaviour
         {
             statistics = GameObject.Find("Stats").GetComponent<Stats>();
         }
+        if (gdManager == null)
+        {
+            gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
+        }
+        if (measureDevice == null)
+        {
+            measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
+        }
         statistics.TooHighValue = false;
         statistics.TooLowValue = false;
         statistics.WrongRingSettings = false;
@@ -32,18 +40,7 @@ public class RegulationRing : MonoBehaviour
 
     void Start()
     {
-        doors = new List<Door>();
-        if (gdManager != null && gdManager.doors != null)
-        {
-            for (int i = 0; i < gdManager.doors.Count; i++)
-            {
-                doors.Add(gdManager.doors[i]);
-            }
-        }
-        if (measureDevice != null)
-        {
-            measureDevice.gdManager = gdManager;
-        }
+        doors = gdManager.doors;
     }
 
     void Update()
@@ -68,7 +65,7 @@ public class RegulationRing : MonoBehaviour
 
     public void IsRingReseted()
     {
-        if (numberOfRegulationKeyPressed == defualtNumberOfRegulationKeyPressed)
+        if (numberOfRegulationKeyPressed == defaultNumberOfRegulationKeyPressed)
         {
             statistics.WrongRingSettings = false;
             statistics.TooLowValue = false;
@@ -77,12 +74,12 @@ public class RegulationRing : MonoBehaviour
         else
         {
             statistics.WrongRingSettings = true;
-            if (numberOfRegulationKeyPressed > defualtNumberOfRegulationKeyPressed)
+            if (numberOfRegulationKeyPressed > defaultNumberOfRegulationKeyPressed)
             {
                 statistics.TooLowValue = true;
                 statistics.TooHighValue = false;
             }
-            else if (numberOfRegulationKeyPressed < defualtNumberOfRegulationKeyPressed)
+            else if (numberOfRegulationKeyPressed < defaultNumberOfRegulationKeyPressed)
             {
                 statistics.TooHighValue = true;
                 statistics.TooLowValue = false;

@@ -71,9 +71,8 @@ public class WeaponSystem : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
-            Target target = rayHit.transform.GetComponent<Target>();
-
-            if (target != null)
+            
+            if (rayHit.transform.TryGetComponent<Target>(out var target))
             {
                 target.TakeDamage(damage);
 
