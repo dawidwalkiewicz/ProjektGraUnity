@@ -18,6 +18,15 @@ public class CharacterHealth : MonoBehaviour
     public Stats statistics;
     public List<Door> doors;
 
+    void Awake()
+    {
+        if (statistics == null)
+        {
+            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+        }
+        statistics.GameCompletionTime = "0:00,000";
+    }    
+
     void Start()
     {
         health = maxHealth;
@@ -43,7 +52,7 @@ public class CharacterHealth : MonoBehaviour
             background.enabled = true;
             gameOverText.enabled = true;
             statistics.GameCompletionTime = timerScript.ToString();
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             SceneManager.LoadScene("Phasis3");
         }
         else

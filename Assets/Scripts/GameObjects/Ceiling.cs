@@ -8,7 +8,7 @@ public class Ceiling : MonoBehaviour
     public bool isCeilingHit = false;
     private int bulletHitCount = 0;
 
-    void Update()
+    void Awake()
     {
         if (weapon == null)
         {
@@ -22,6 +22,9 @@ public class Ceiling : MonoBehaviour
         {
             regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
         }
+        statistics.MissedWalls = 3;
+        statistics.WallsCounter = 0;
+        statistics.WallsHitMoreThanOnce = 0;
     }
 
     void OnCollisionEnter(Collision collision)

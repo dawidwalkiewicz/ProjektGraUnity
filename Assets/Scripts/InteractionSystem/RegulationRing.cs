@@ -19,6 +19,17 @@ public class RegulationRing : MonoBehaviour
     public MeasureDevice measureDevice;
     public List<Door> doors;
 
+    void Awake()
+    {
+        if (statistics == null)
+        {
+            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+        }
+        statistics.TooHighValue = false;
+        statistics.TooLowValue = false;
+        statistics.WrongRingSettings = false;
+    }
+
     void Start()
     {
         doors = new List<Door>();
@@ -37,22 +48,20 @@ public class RegulationRing : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < doors.Count; i++)
-        {
-            RegulateDoor(doors[i]);
-        }
+        Door door = measureDevice.GetClosestDoor();
+        RegulateDoor(door);
     }
 
     public void RegulateDoor(Door door)
     {
-        if (Input.GetKey(regulateMinusKey))
+        if (Input.GetKeyDown(regulateMinusKey))
         {
-            RegulateRingMinus();
+            RegulateRingMinus(door);
             numberOfRegulationKeyPressed++;
         }
-        else if (Input.GetKey(regulatePlusKey))
+        else if (Input.GetKeyDown(regulatePlusKey))
         {
-            RegulateRingPlus();
+            RegulateRingPlus(door);
             numberOfRegulationKeyPressed--;
         }
     }
@@ -62,25 +71,35 @@ public class RegulationRing : MonoBehaviour
         if (numberOfRegulationKeyPressed == defualtNumberOfRegulationKeyPressed)
         {
             statistics.WrongRingSettings = false;
+            statistics.TooLowValue = false;
+            statistics.TooHighValue = false;
         }
         else
         {
             statistics.WrongRingSettings = true;
+            if (numberOfRegulationKeyPressed > defualtNumberOfRegulationKeyPressed)
+            {
+                statistics.TooLowValue = true;
+                statistics.TooHighValue = false;
+            }
+            else if (numberOfRegulationKeyPressed < defualtNumberOfRegulationKeyPressed)
+            {
+                statistics.TooHighValue = true;
+                statistics.TooLowValue = false;
+            }
         }
     }
 
-    public void RegulateRingPlus()
+    public void RegulateRingPlus(Door door)
     {
-        Door door = measureDevice.GetClosestDoor();
         if (door != null)
         {
             transform.Rotate(speed * Time.deltaTime * Vector3.up);
         }
     }
 
-    public void RegulateRingMinus()
+    public void RegulateRingMinus(Door door)
     {
-        Door door = measureDevice.GetClosestDoor();
         if (door != null)
         {
             if (door.doorValue > door.minValue)
@@ -93,8 +112,6 @@ public class RegulationRing : MonoBehaviour
             {
                 measureDevice.MeasureDoorValue();
                 measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue);
-                statistics.NeutralizedDoorsCounter++;
-                statistics.UnneutralizedDoorsCounter--;
             }
         }
     }

@@ -32,10 +32,12 @@ public class CharacterMovement : MonoBehaviour
 
     private Ray ray;
     private RaycastHit rcHit;
+    public bool canMove;
 
     private void Start()
     {
         mainCamera = Camera.main;
+        canMove = true;
         readyToJump = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -60,6 +62,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void MyInput()
     {
+        if (!canMove)
+            return;
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         var dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -77,6 +81,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (!canMove)
+            return;
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         if (grounded)
         {

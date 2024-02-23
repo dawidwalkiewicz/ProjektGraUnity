@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,13 +19,15 @@ public class Door : MonoBehaviour
     public Transform respawnPoint;
     public Vector3 characterPosition;
     public RaycastHit rcHit;
-    public float interactionDistance = 1.0f;
 
     public CharacterHealth characterHealth;
     private GameDataManager gdManager;
     List<Door> doors;
     public RegulationRing regulationRing;
-    public bool tooCloseToTheDoor;
+    MeasureDevice measureDevice;
+    public bool tooCloseToTheDoor = false;
+    private bool isFrozen = false;
+    private Color defaultColor;
 
     void Awake()
     {
@@ -36,10 +39,15 @@ public class Door : MonoBehaviour
         {
             gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         }
+        if (measureDevice == null)
+        {
+            measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
+        }
         characterPosition = new Vector3(-3f, 0f, 10f);
         statistics.NeutralizedDoorsCounter = 0;
         statistics.UnneutralizedDoorsCounter = 4;
         statistics.NeutralizedRoomsCounter = 0;
+        statistics.WasMeasurementSet = false;
     }
 
     void Start()
@@ -47,6 +55,7 @@ public class Door : MonoBehaviour
         doors = gdManager.doors;
         tooCloseToTheDoor = false;
         IsNeutralized = false;
+        defaultColor = GetComponent<MeshRenderer>().material.color;
     }
 
     void Update()
@@ -58,9 +67,27 @@ public class Door : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Door door = measureDevice.GetClosestDoor();
+            tooCloseToTheDoor = true;
+            door.GetComponent<MeshRenderer>().material.color = Color.red;
             characterHealth.TakeDamage(damage);
-            character.transform.position = respawnPoint.position;
+            if (!isFrozen)
+            {
+                StartCoroutine(FreezeCharacter());
+                character.transform.position = respawnPoint.position;
+                door.GetComponent<MeshRenderer>().material.color = defaultColor;
+                tooCloseToTheDoor = false;
+            }
         }
+    }
+
+    IEnumerator FreezeCharacter()
+    {
+        isFrozen = true;
+        character.GetComponent<CharacterMovement>().canMove = false;
+        yield return new WaitForSeconds(5f);
+        character.GetComponent<CharacterMovement>().canMove = true;
+        isFrozen = false;
     }
 
     private void ChangeDoorPosition(int index)
@@ -74,26 +101,23 @@ public class Door : MonoBehaviour
     public void NeutralizeDoor()
     {
         float distance = Vector3.Distance(character.transform.position, transform.position);
-        for (int i = 0; i < doors.Count; i++)
+        Door door = measureDevice.GetClosestDoor();
+        float interactionDistance = 10.0f;
+        if (door != null & !door.IsNeutralized)
         {
-            Door door = doors[i];
-            if (door != null)
+            if (door.doorValue > minValue && distance <= interactionDistance)
             {
-                if (door.doorValue > minValue && distance <= interactionDistance)
-                {
-                    tooCloseToTheDoor = true;
-                    doors[i].GetComponent<MeshRenderer>().material.color = Color.red;
-                    regulationRing.RegulateDoor(door);
-                }
-                else if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKey(neutralizeKey))
-                {
-                    door.IsNeutralized = true;
-                    statistics.WasMeasurementSet = true;
-                    statistics.NeutralizedDoorsCounter++;
-                    statistics.UnneutralizedDoorsCounter--;
-                    ChangeDoorPosition(i);
-                    statistics.NeutralizedRoomsCounter++;
-                }
+                regulationRing.RegulateDoor(door);
+            }
+            else if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKeyDown(neutralizeKey))
+            {
+                door.IsNeutralized = true;
+                statistics.WasMeasurementSet = true;
+                statistics.NeutralizedDoorsCounter++;
+                statistics.UnneutralizedDoorsCounter--;
+                int index = doors.IndexOf(door);
+                ChangeDoorPosition(index);
+                statistics.NeutralizedRoomsCounter++;
             }
         }
     }

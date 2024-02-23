@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
     <Compile Include="Assets\GameDataManager.cs" />
-    <Compile Include="Assets\Scripts\TryAgainButton.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableMeasureDevice.cs" />
     <Compile Include="Assets\Scripts\CharacterHealth.cs" />
     <Compile Include="Assets\Scripts\AttachToCamera.cs" />

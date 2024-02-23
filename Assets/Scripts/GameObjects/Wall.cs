@@ -10,12 +10,6 @@ public class Wall : MonoBehaviour
 
     void Awake()
     {
-        statistics.MissedWalls = 3;
-        statistics.WallsCounter = 0;
-    }
-    
-    void Update()
-    {
         if (weapon == null)
         {
             weapon = GameObject.Find("Weapon").GetComponent<WeaponSystem>();
@@ -28,6 +22,9 @@ public class Wall : MonoBehaviour
         {
             regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
         }
+        statistics.WallsCounter = 0;
+        statistics.MissedWalls = 3;
+        statistics.WallsHitMoreThanOnce = 0;
     }
 
     void OnCollisionEnter(Collision collision)

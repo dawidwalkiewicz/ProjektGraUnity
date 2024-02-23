@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinalResultsScreen : MonoBehaviour
@@ -9,9 +10,7 @@ public class FinalResultsScreen : MonoBehaviour
 
     void Start()
     {
-        tryAgainButton.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        statistics = GameDataManager.instance.statistics;
     }
 
     void OnEnable()
@@ -23,27 +22,27 @@ public class FinalResultsScreen : MonoBehaviour
     {
         if (resultsText != null && statistics != null)
         {
-            resultsText.text = "Time: " + GameDataManager.instance.statistics.GameCompletionTime + System.Environment.NewLine +
-                "Neutralized doors: " + GameDataManager.instance.statistics.NeutralizedDoorsCounter + System.Environment.NewLine
-                + "Unneutralized doors: " + GameDataManager.instance.statistics.UnneutralizedDoorsCounter +
-                System.Environment.NewLine + "Neutralized rooms: " + GameDataManager.instance.statistics.NeutralizedRoomsCounter;
-            if (GameDataManager.instance.statistics.WasMeasurementSet == false)
+            resultsText.text = "Time: " + statistics.GameCompletionTime + System.Environment.NewLine +
+                "Neutralized doors: " + statistics.NeutralizedDoorsCounter + System.Environment.NewLine
+                + "Unneutralized doors: " + statistics.UnneutralizedDoorsCounter +
+                System.Environment.NewLine + "Neutralized rooms: " + statistics.NeutralizedRoomsCounter;
+            if (statistics.WasMeasurementSet == false)
             {
                 resultsText.text += System.Environment.NewLine + "Measurement was not set";
             }
-            if (GameDataManager.instance.statistics.TooHighValue == true)
+            if (statistics.TooHighValue == true)
             {
                 resultsText.text += System.Environment.NewLine + "Too high value set";
             }
-            if (GameDataManager.instance.statistics.TooLowValue == true)
+            if (statistics.TooLowValue == true)
             {
                 resultsText.text += System.Environment.NewLine + "Too low value set";
             }
-            if (GameDataManager.instance.statistics.WrongRingSettings == true)
+            if (statistics.WrongRingSettings == true)
             {
                 resultsText.text += System.Environment.NewLine + "Wrong ring settings";
             }
-            if (GameDataManager.instance.statistics.MissedWalls > 0)
+            if (statistics.MissedWalls > 0)
             {
                 resultsText.text += System.Environment.NewLine + "Missed walls: " + statistics.MissedWalls;
             }
@@ -51,6 +50,21 @@ public class FinalResultsScreen : MonoBehaviour
             {
                 resultsText.text += System.Environment.NewLine + "Missed walls: 0";
             }
+            if (statistics.WallsHitMoreThanOnce > 0)
+            {
+                resultsText.text += System.Environment.NewLine + "Walls hit more than once: " + statistics.MissedWalls;
+            }
+            else
+            {
+                resultsText.text += System.Environment.NewLine + "Walls hit more than once: 0";
+            }
         }
+    }
+
+    public void ResetTheGame()
+    {
+        statistics.GetComponent<Stats>().ResetStats();
+        print("The button is working.");
+        SceneManager.LoadScene("Phasis2");
     }
 }
