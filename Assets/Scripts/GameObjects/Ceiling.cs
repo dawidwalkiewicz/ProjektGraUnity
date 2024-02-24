@@ -22,7 +22,7 @@ public class Ceiling : MonoBehaviour
         {
             regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
         }
-        statistics.MissedWalls = 3;
+        statistics.MissedWalls = 4;
         statistics.WallsCounter = 0;
         statistics.WallsHitMoreThanOnce = 0;
     }

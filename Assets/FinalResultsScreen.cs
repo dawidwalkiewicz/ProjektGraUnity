@@ -17,6 +17,11 @@ public class FinalResultsScreen : MonoBehaviour
     {
         Setup();
     }
+    
+    void Update()
+    {
+        ResetTheGame();
+    }
 
     public void Setup()
     {

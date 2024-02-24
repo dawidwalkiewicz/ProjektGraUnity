@@ -11,8 +11,7 @@ public class GameDataManager : MonoBehaviour
     public RegulationRing regulationRing;
     public Stats statistics;
     public List<Door> doors;
-    public List<Wall> walls;
-    public Ceiling ceiling;
+    public List<Room> rooms;
     MeasureDevice measureDevice;
 
     void Awake()
@@ -47,12 +46,14 @@ public class GameDataManager : MonoBehaviour
         Door door4 = GameObject.Find("Door4").GetComponent<Door>();
         door4.doorValue = Random.Range(1, 9);
         doors.Add(door4);
-        walls = new List<Wall>();
-        Wall wall1 = GameObject.Find("Wall1").GetComponent<Wall>();
-        walls.Add(wall1);
-        Wall wall2 = GameObject.Find("Wall2").GetComponent<Wall>();
-        walls.Add(wall2);
-        ceiling = GameObject.Find("Ceiling").GetComponent<Ceiling>();
+        Room room1 = GameObject.Find("Room1").GetComponent<Room>();
+        rooms.Add(room1);
+        Room room2 = GameObject.Find("Room2").GetComponent<Room>();
+        rooms.Add(room2);
+        Room room3 = GameObject.Find("Room3").GetComponent<Room>();
+        rooms.Add(room3);
+        Room room4 = GameObject.Find("Room4").GetComponent<Room>();
+        rooms.Add(room4);
         for (int i = 0; i < doors.Count; i++)
         {
             if (character != null)

@@ -10,6 +10,7 @@ TagManager:
   - Door
   - Ceiling
   - GameDataManager
+  - Floor
   layers:
   - Default
   - TransparentFX

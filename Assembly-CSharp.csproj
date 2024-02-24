@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableMeasureDevice.cs" />
     <Compile Include="Assets\Scripts\CharacterHealth.cs" />
     <Compile Include="Assets\Scripts\AttachToCamera.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Room.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\WardrobeClothesDoor.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Ramps\Runtime\RampAsset.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\ProximityActivate.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableWeapon.cs" />
+    <Compile Include="Assets\Scripts\GameObjects\Floor.cs" />
     <Compile Include="Assets\Scripts\Target.cs" />
     <Compile Include="Assets\Scripts\GameObjects\Ceiling.cs" />
     <Compile Include="Assets\Scripts\InteractionSystem\ClaimableObjects\ClaimableVest.cs" />

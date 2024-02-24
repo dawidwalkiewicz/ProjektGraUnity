@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
         {
             measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
         }
-        characterPosition = new Vector3(-3f, 0f, 10f);
+        characterPosition = new Vector3(-20f, 0f, 10f);
         statistics.NeutralizedDoorsCounter = 0;
         statistics.UnneutralizedDoorsCounter = 4;
         statistics.NeutralizedRoomsCounter = 0;
@@ -115,14 +115,16 @@ public class Door : MonoBehaviour
                     statistics.UnneutralizedDoorsCounter--;
                     int index = doors.IndexOf(door);
                     ChangeDoorPosition(index);
-                    statistics.NeutralizedRoomsCounter++;
                     hasNeutralizeKeyBeenPressed = true;
                 }
             }
             else if (door.IsNeutralized && distance <= interactionDistance && Input.GetKeyDown(regulationRing.regulatePlusKey))
             {
                 regulationRing.RegulateDoor(door);
-                hasNeutralizeKeyBeenPressed = false;
+                if (regulationRing.numberOfRegulationKeyPressed == 0)
+                {
+                    hasNeutralizeKeyBeenPressed = false;
+                }
             }
         }
     }

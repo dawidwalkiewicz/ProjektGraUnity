@@ -22,8 +22,8 @@ public class Wall : MonoBehaviour
         {
             regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
         }
+        statistics.MissedWalls = 4;
         statistics.WallsCounter = 0;
-        statistics.MissedWalls = 3;
         statistics.WallsHitMoreThanOnce = 0;
     }
 

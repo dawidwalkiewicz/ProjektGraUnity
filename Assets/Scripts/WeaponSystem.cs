@@ -22,8 +22,10 @@ public class WeaponSystem : MonoBehaviour
     public Text text;
     private Wall wall;
     private Ceiling ceiling;
+    private Floor floor;
     private int wallHitCount;
     private int ceilingHitCount;
+    private int floorHitCount;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class WeaponSystem : MonoBehaviour
     {
         wallHitCount = 0;
         ceilingHitCount = 0;
+        floorHitCount = 0;
     }
 
     private void Update()
@@ -71,34 +74,51 @@ public class WeaponSystem : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnemy))
         {
             Debug.Log(rayHit.collider.name);
-            
+
             if (rayHit.transform.TryGetComponent<Target>(out var target))
             {
                 target.TakeDamage(damage);
+            }
 
-                if (rayHit.collider.CompareTag("Wall"))
+            if (rayHit.transform.TryGetComponent<Floor>(out var floor))
+            {
+                floor.TakeDamage(damage);
+            }
+
+            if (rayHit.collider.CompareTag("Wall"))
+            {
+                wallHitCount++;
+                if (wallHitCount == 1)
                 {
-                    wallHitCount++;
-                    if (wallHitCount == 1)
-                    {
-                        Debug.Log("Wall was hit once.");
-                    }
-                    else if (wallHitCount > 1)
-                    {
-                        Debug.Log("Wall was hit more than once.");
-                    }
+                    Debug.Log("Wall was hit once.");
                 }
-                else if (rayHit.collider.CompareTag("Ceiling"))
+                else if (wallHitCount > 1)
                 {
-                    ceilingHitCount++;
-                    if (ceilingHitCount == 1)
-                    {
-                        Debug.Log("Ceiling was hit once.");
-                    }
-                    else if (ceilingHitCount > 1)
-                    {
-                        Debug.Log("Ceiling was hit more than once.");
-                    }
+                    Debug.Log("Wall was hit more than once.");
+                }
+            }
+            else if (rayHit.collider.CompareTag("Ceiling"))
+            {
+                ceilingHitCount++;
+                if (ceilingHitCount == 1)
+                {
+                    Debug.Log("Ceiling was hit once.");
+                }
+                else if (ceilingHitCount > 1)
+                {
+                    Debug.Log("Ceiling was hit more than once.");
+                }
+            }
+            else if (rayHit.collider.CompareTag("Floor"))
+            {
+                floorHitCount++;
+                if (floorHitCount == 1)
+                {
+                    Debug.Log("Floor was hit once.");
+                }
+                else if (floorHitCount > 1)
+                {
+                    Debug.Log("Floor was hit more than once.");
                 }
             }
         }

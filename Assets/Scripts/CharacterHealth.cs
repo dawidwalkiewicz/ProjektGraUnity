@@ -29,7 +29,7 @@ public class CharacterHealth : MonoBehaviour
 
     void Start()
     {
-        doors ??= new List<Door>();
+        doors ??= GameObject.Find("GameDataManager").GetComponent<GameDataManager>().doors;
         health = maxHealth;
         dead = false;
         for (int i = 0; i < doors.Count; i++)
