@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Room : MonoBehaviour
 {
@@ -37,18 +41,29 @@ public class Room : MonoBehaviour
         {
             NeutralizeRoom();
         }
+        if (gdManager.statistics.NeutralizedRoomsCounter == gdManager.rooms.Count)
+        {
+            FinishTheGame();
+        }
     }
 
     public void NeutralizeRoom()
     {
-        for (int i = 0; i < gdManager.rooms.Count; i++)
+        Room room = measureDevice.GetClosestRoom();
+        if (room.regulationRing.numberOfRegulationKeyPressed == 0 && room.wall1.isWallHit && room.wall2.isWallHit
+            && room.ceiling.isCeilingHit && room.floor.isFloorHit)
         {
-            if (gdManager.rooms[i].regulationRing.numberOfRegulationKeyPressed == 0 && gdManager.rooms[i].wall1.isWallHit
-                && gdManager.rooms[i].wall2.isWallHit && gdManager.rooms[i].ceiling.isCeilingHit &&
-                gdManager.rooms[i].floor.isFloorHit)
-            {
-                gdManager.statistics.NeutralizedRoomsCounter++;
-            }
+            gdManager.statistics.NeutralizedRoomsCounter++;
         }
+    }
+
+    public void FinishTheGame()
+    {
+        gdManager.charHealth.timerScript.enabled = false;
+        gdManager.charHealth.background.enabled = true;
+        gdManager.charHealth.gameOverText.text = "Game completed in:"/* + gdManager.charHealth.timerScript.timerText.ToString()*/;
+        gdManager.charHealth.gameOverText.enabled = true;
+        gdManager.statistics.GameCompletionTime = gdManager.charHealth.timerScript.timerText.ToString();
+        SceneManager.LoadScene("Phasis3");
     }
 }

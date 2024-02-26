@@ -33,7 +33,10 @@ public class GameDataManager : MonoBehaviour
 
     void Start()
     {
-        doors = new List<Door>();
+        if (doors == null)
+        {
+            doors = new List<Door>();
+        }
         Door door1 = GameObject.Find("Door1").GetComponent<Door>();
         door1.doorValue = Random.Range(1, 9);
         doors.Add(door1);
@@ -62,7 +65,7 @@ public class GameDataManager : MonoBehaviour
             }
             if (charHealth != null)
             {
-                doors[i].characterHealth = charHealth;
+                doors[i].gdManager.charHealth = charHealth;
             }
             if (respawnPoint != null)
             {
@@ -81,13 +84,9 @@ public class GameDataManager : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < doors.Count; i++)
-        {
-            doors[i].NeutralizeDoor();
-        }
-        for (int j = 0; j < rooms.Count; j++)
-        {
-            rooms[j].NeutralizeRoom();
-        }
+        Door door = measureDevice.GetClosestDoor();
+        door.NeutralizeDoor();
+        Room room = measureDevice.GetClosestRoom();
+        room.NeutralizeRoom();
     }
 }

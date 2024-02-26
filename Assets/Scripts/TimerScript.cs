@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimerScript : MonoBehaviour
 {
-    private TMP_Text timerText;
+    public TMP_Text timerText;
     enum TimerType { Countdown, Stopwatch }
     [SerializeField] private TimerType timerType;
 

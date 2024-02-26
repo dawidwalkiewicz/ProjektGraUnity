@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,6 @@ public class MeasureDevice : MonoBehaviour
     public KeyCode measureKey = KeyCode.M;
 
     public Text doorValueText;
-    public List<Door> doors;
 
     public Transform measureDevicePosition;
     public GameDataManager gdManager;
@@ -21,7 +21,6 @@ public class MeasureDevice : MonoBehaviour
     void Start()
     {
         doorValueText.enabled = false;
-        doors = gdManager.doors;
     }
 
     void Update()
@@ -37,7 +36,7 @@ public class MeasureDevice : MonoBehaviour
             if (closestDoor != null)
             {
                 doorValueText.enabled = true;
-                UpdateTextAndValue(doors.IndexOf(closestDoor), closestDoor.doorValue);
+                UpdateTextAndValue(gdManager.doors.IndexOf(closestDoor), closestDoor.doorValue);
             }
             else
             {
@@ -54,7 +53,7 @@ public class MeasureDevice : MonoBehaviour
     {
         Door closestDoor = null;
         float closestDistance = 10.0f;
-        foreach (Door door in doors)
+        foreach (Door door in gdManager.doors)
         {
             float distance = Vector3.Distance(transform.position, door.transform.position);
             if (distance < closestDistance)
@@ -66,26 +65,42 @@ public class MeasureDevice : MonoBehaviour
         return closestDoor;
     }
 
+    public Room GetClosestRoom()
+    {
+        Room closestRoom = null;
+        float closestDistance = 1.0f;
+        foreach (Room room in gdManager.rooms)
+        {
+            float distance = Vector3.Distance(transform.position, room.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestRoom = room;
+            }
+        }
+        return closestRoom;
+    }
+
     public void UpdateTextAndValue(int index, int newValue)
     {
-        if (index >= 0 && index < doors.Count)
+        if (index >= 0 && index < gdManager.doors.Count)
         {
-            doors[index].doorValue = newValue;
-            if (newValue == doors[index].minValue && !doors[index].IsNeutralized)
+            gdManager.doors[index].doorValue = newValue;
+            if (newValue == gdManager.doors[index].minValue && !gdManager.doors[index].IsNeutralized)
             {
                 doorValueText.text = "Door value: " + newValue.ToString() + System.Environment.NewLine + "Neutralize the door";
             }
-            else if (newValue == doors[index].minValue && doors[index].IsNeutralized)
+            else if (newValue == gdManager.doors[index].minValue && gdManager.doors[index].IsNeutralized)
             {
                 doorValueText.text = "Door value: " + newValue.ToString() + System.Environment.NewLine + "Door neutralized";
             }
-            else if (newValue > doors[index].minValue)
+            else if (newValue > gdManager.doors[index].minValue)
             {
                 gdManager.statistics.TooLowValue = true;
                 gdManager.statistics.TooHighValue = false;
                 doorValueText.text = "Door value: " + newValue.ToString() + System.Environment.NewLine + "Too low value set";
             }
-            else if (newValue < doors[index].minValue)
+            else if (newValue < gdManager.doors[index].minValue)
             {
                 gdManager.statistics.TooLowValue = false;
                 gdManager.statistics.TooHighValue = true;

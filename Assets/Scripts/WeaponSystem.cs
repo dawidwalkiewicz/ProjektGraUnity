@@ -5,7 +5,8 @@ public class WeaponSystem : MonoBehaviour
 {
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
+    public int magazineSize = 4;
+    public int bulletsPerTap;
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
@@ -20,9 +21,6 @@ public class WeaponSystem : MonoBehaviour
     public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public Text text;
-    private Wall wall;
-    private Ceiling ceiling;
-    private Floor floor;
     private int wallHitCount;
     private int ceilingHitCount;
     private int floorHitCount;

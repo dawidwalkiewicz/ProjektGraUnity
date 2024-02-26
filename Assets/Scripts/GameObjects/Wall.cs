@@ -9,7 +9,7 @@ public class Wall : MonoBehaviour
     public GameObject prefab;
     public bool isWallHit = false;
     private int bulletHitCount = 0;
-    List<Room> rooms;
+    //List<Room> rooms;
 
     void Awake()
     {
@@ -29,21 +29,18 @@ public class Wall : MonoBehaviour
         {
             regulationRing = gdManager.regulationRing;
         }
-        if (rooms == null)
+        /*if (rooms == null)
         {
             rooms = gdManager.rooms;
-        }
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            gdManager.statistics.MissedWalls += 2;
-            gdManager.statistics.WallsCounter = 0;
-            gdManager.statistics.WallsHitMoreThanOnce = 0;
-        }
+        }*/
+        gdManager.statistics.MissedWalls += 1;
+        gdManager.statistics.WallsCounter = 0;
+        gdManager.statistics.WallsHitMoreThanOnce = 0;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == prefab.name)
+        if (collision.gameObject.name == prefab.name && collision.gameObject.CompareTag("Ceiling"))
         {
             bulletHitCount++;
             WasWallHit(collision);

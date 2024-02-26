@@ -12,11 +12,9 @@ public class CharacterHealth : MonoBehaviour
     public bool tooCloseToTheDoor;
     public Text lifeText;
     public Text gameOverText;
-    public TMP_Text timerText;
     public Image background;
     public TimerScript timerScript;
     public GameDataManager gdManager;
-    public List<Door> doors;
 
     void Awake()
     {
@@ -29,16 +27,15 @@ public class CharacterHealth : MonoBehaviour
 
     void Start()
     {
-        doors ??= gdManager.doors;
         health = maxHealth;
         dead = false;
-        for (int i = 0; i < doors.Count; i++)
+        for (int i = 0; i < gdManager.doors.Count; i++)
         {
-            tooCloseToTheDoor = doors[i].tooCloseToTheDoor;
+            tooCloseToTheDoor = gdManager.doors[i].tooCloseToTheDoor;
         }
         lifeText.text = "x " + health.ToString();
         background.enabled = false;
-        gameOverText.enabled = false;
+        gameOverText.enabled = false; 
         timerScript.enabled = true;
     }
 
@@ -51,7 +48,7 @@ public class CharacterHealth : MonoBehaviour
             timerScript.enabled = false;
             background.enabled = true;
             gameOverText.enabled = true;
-            gdManager.statistics.GameCompletionTime = timerScript.ToString();
+            gdManager.statistics.GameCompletionTime = timerScript.timerText.ToString();
             Destroy(gameObject);
             SceneManager.LoadScene("Phasis3");
         }

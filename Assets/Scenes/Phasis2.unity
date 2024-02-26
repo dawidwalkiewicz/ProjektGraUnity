@@ -847,6 +847,9 @@ MonoBehaviour:
   wall2: {fileID: 932516827}
   ceiling: {fileID: 1932409684}
   floor: {fileID: 721303454}
+  walls: []
+  ceilings: []
+  floors: []
   gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1001 &202904676
@@ -1848,6 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35c9def42eee5244813ccc7f888efbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 474671602}
   timerType: 1
   timeToDisplay: 0
 --- !u!114 &474671602
@@ -2280,6 +2284,9 @@ MonoBehaviour:
   wall2: {fileID: 572628799}
   ceiling: {fileID: 814422090}
   floor: {fileID: 1792930956}
+  walls: []
+  ceilings: []
+  floors: []
   gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &518454629
@@ -3815,11 +3822,9 @@ MonoBehaviour:
   tooCloseToTheDoor: 0
   lifeText: {fileID: 233310222}
   gameOverText: {fileID: 1868914913}
-  timerText: {fileID: 474671602}
   background: {fileID: 1516512791}
   timerScript: {fileID: 474671601}
   gdManager: {fileID: 0}
-  doors: []
 --- !u!1 &1033564593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1094319184742494716, guid: 85059e9f7c8b32142a81cb771a158c58,
@@ -3980,7 +3985,6 @@ MonoBehaviour:
   character: {fileID: 0}
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
-  characterHealth: {fileID: 0}
   gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
@@ -4630,7 +4634,6 @@ MonoBehaviour:
   character: {fileID: 0}
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
-  characterHealth: {fileID: 0}
   gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
@@ -5253,7 +5256,6 @@ MonoBehaviour:
   character: {fileID: 0}
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
-  characterHealth: {fileID: 0}
   gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
@@ -5544,6 +5546,9 @@ MonoBehaviour:
   wall2: {fileID: 2002221144}
   ceiling: {fileID: 1719092466}
   floor: {fileID: 1304120189}
+  walls: []
+  ceilings: []
+  floors: []
   gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &1719092460
@@ -6454,7 +6459,6 @@ MonoBehaviour:
   character: {fileID: 0}
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
-  characterHealth: {fileID: 0}
   gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
@@ -6894,6 +6898,7 @@ MonoBehaviour:
   measureKey: 109
   doorValueText: {fileID: 1591665470}
   doors: []
+  rooms: []
   measureDevicePosition: {fileID: 702310677}
   gdManager: {fileID: 13481585}
 --- !u!1 &2051575753
@@ -7163,6 +7168,9 @@ MonoBehaviour:
   wall2: {fileID: 2000116241}
   ceiling: {fileID: 1169712718}
   floor: {fileID: 2131794581}
+  walls: []
+  ceilings: []
+  floors: []
   gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &2126031446

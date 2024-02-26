@@ -12,7 +12,7 @@ public class Floor : MonoBehaviour
     public bool isFloorHit = false;
     private int bulletHitCount = 0;
     private float health = 100f;
-    List<Room> rooms;
+    //List<Room> rooms;
 
     void Awake()
     {
@@ -32,21 +32,18 @@ public class Floor : MonoBehaviour
         {
             regulationRing = gdManager.regulationRing;
         }
-        if (rooms == null)
+        /*if (rooms == null)
         {
             rooms = gdManager.rooms;
-        }
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            gdManager.statistics.MissedWalls += 1;
-            gdManager.statistics.WallsCounter = 0;
-            gdManager.statistics.WallsHitMoreThanOnce = 0;
-        }
+        }*/
+        gdManager.statistics.MissedWalls += 1;
+        gdManager.statistics.WallsCounter = 0;
+        gdManager.statistics.WallsHitMoreThanOnce = 0;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == prefab.name)
+        if (collision.gameObject.name == prefab.name && collision.gameObject.CompareTag("Floor"))
         {
             bulletHitCount++;
             WasFloorHit(collision);

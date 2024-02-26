@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -17,9 +16,7 @@ public class Door : MonoBehaviour
     public Vector3 characterPosition;
     public RaycastHit rcHit;
 
-    public CharacterHealth characterHealth;
     public GameDataManager gdManager;
-    List<Door> doors;
     public RegulationRing regulationRing;
     MeasureDevice measureDevice;
     public bool tooCloseToTheDoor = false;
@@ -42,7 +39,6 @@ public class Door : MonoBehaviour
 
     void Start()
     {
-        doors = gdManager.doors;
         tooCloseToTheDoor = false;
         IsNeutralized = false;
         defaultColor = GetComponent<MeshRenderer>().material.color;
@@ -63,7 +59,7 @@ public class Door : MonoBehaviour
             Door door = measureDevice.GetClosestDoor();
             tooCloseToTheDoor = true;
             door.GetComponent<MeshRenderer>().material.color = Color.red;
-            characterHealth.TakeDamage(damage);
+            gdManager.charHealth.TakeDamage(damage);
             if (!isFrozen)
             {
                 StartCoroutine(FreezeCharacter());
@@ -85,9 +81,9 @@ public class Door : MonoBehaviour
 
     private void ChangeDoorPosition(int index)
     {
-        if (index >= 0 && index < doors.Count)
+        if (index >= 0 && index < gdManager.doors.Count)
         {
-            doors[index].transform.position += new Vector3(0f, 10f, 0f);
+            gdManager.doors[index].transform.position += new Vector3(0f, 10f, 0f);
         }
     }
 
@@ -100,13 +96,13 @@ public class Door : MonoBehaviour
         {
             if (!door.IsNeutralized)
             {
-                if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKeyDown(neutralizeKey) && !hasNeutralizeKeyBeenPressed)
+                if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKey(neutralizeKey) && !hasNeutralizeKeyBeenPressed)
                 {
                     door.IsNeutralized = true;
                     gdManager.statistics.WasMeasurementSet = true;
                     gdManager.statistics.NeutralizedDoorsCounter++;
                     gdManager.statistics.UnneutralizedDoorsCounter--;
-                    int index = doors.IndexOf(door);
+                    int index = gdManager.doors.IndexOf(door);
                     ChangeDoorPosition(index);
                     hasNeutralizeKeyBeenPressed = true;
                 }
