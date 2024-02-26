@@ -25,7 +25,7 @@ public class Stats : MonoBehaviour
         TooHighValue = false;
         TooLowValue = false;
         WrongRingSettings = false;
-        MissedWalls = 3;
+        MissedWalls = 16;
         WallsHitMoreThanOnce = 0;
     }
 }

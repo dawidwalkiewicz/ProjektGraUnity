@@ -7,9 +7,7 @@ public class Door : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode neutralizeKey = KeyCode.N;
 
-    public Stats statistics;
     public int doorValue;
-
     public int minValue = 0;
     public int maxValue = 9;
     public int damage = 1;
@@ -20,7 +18,7 @@ public class Door : MonoBehaviour
     public RaycastHit rcHit;
 
     public CharacterHealth characterHealth;
-    private GameDataManager gdManager;
+    public GameDataManager gdManager;
     List<Door> doors;
     public RegulationRing regulationRing;
     MeasureDevice measureDevice;
@@ -31,10 +29,6 @@ public class Door : MonoBehaviour
 
     void Awake()
     {
-        if (statistics == null)
-        {
-            statistics = GameObject.Find("Stats").GetComponent<Stats>();
-        }
         if (gdManager == null)
         {
             gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
@@ -44,10 +38,6 @@ public class Door : MonoBehaviour
             measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
         }
         characterPosition = new Vector3(-20f, 0f, 10f);
-        statistics.NeutralizedDoorsCounter = 0;
-        statistics.UnneutralizedDoorsCounter = 4;
-        statistics.NeutralizedRoomsCounter = 0;
-        statistics.WasMeasurementSet = false;
     }
 
     void Start()
@@ -56,6 +46,9 @@ public class Door : MonoBehaviour
         tooCloseToTheDoor = false;
         IsNeutralized = false;
         defaultColor = GetComponent<MeshRenderer>().material.color;
+        gdManager.statistics.NeutralizedDoorsCounter = 0;
+        gdManager.statistics.UnneutralizedDoorsCounter = 4;
+        gdManager.statistics.WasMeasurementSet = false;
     }
 
     void Update()
@@ -85,7 +78,7 @@ public class Door : MonoBehaviour
     {
         isFrozen = true;
         character.GetComponent<CharacterMovement>().canMove = false;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         character.GetComponent<CharacterMovement>().canMove = true;
         isFrozen = false;
     }
@@ -110,9 +103,9 @@ public class Door : MonoBehaviour
                 if (door.doorValue == minValue && distance <= interactionDistance && Input.GetKeyDown(neutralizeKey) && !hasNeutralizeKeyBeenPressed)
                 {
                     door.IsNeutralized = true;
-                    statistics.WasMeasurementSet = true;
-                    statistics.NeutralizedDoorsCounter++;
-                    statistics.UnneutralizedDoorsCounter--;
+                    gdManager.statistics.WasMeasurementSet = true;
+                    gdManager.statistics.NeutralizedDoorsCounter++;
+                    gdManager.statistics.UnneutralizedDoorsCounter--;
                     int index = doors.IndexOf(door);
                     ChangeDoorPosition(index);
                     hasNeutralizeKeyBeenPressed = true;

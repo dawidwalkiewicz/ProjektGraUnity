@@ -57,7 +57,7 @@ public class FinalResultsScreen : MonoBehaviour
             }
             if (statistics.WallsHitMoreThanOnce > 0)
             {
-                resultsText.text += System.Environment.NewLine + "Walls hit more than once: " + statistics.MissedWalls;
+                resultsText.text += System.Environment.NewLine + "Walls hit more than once: " + statistics.WallsHitMoreThanOnce;
             }
             else
             {

@@ -397,7 +397,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1536
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 192
@@ -582,9 +582,9 @@ MonoBehaviour:
   numberOfRegulationKeyPressed: 0
   speed: 30
   gdManager: {fileID: 13481585}
-  statistics: {fileID: 1704350180}
   measureDevice: {fileID: 2047784192}
   doors: []
+  rooms: []
 --- !u!1 &114505231
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +847,7 @@ MonoBehaviour:
   wall2: {fileID: 932516827}
   ceiling: {fileID: 1932409684}
   floor: {fileID: 721303454}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1001 &202904676
 PrefabInstance:
@@ -1130,8 +1130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &290803204
 Rigidbody:
@@ -1280,8 +1281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &294764436
 Rigidbody:
@@ -1980,7 +1982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24ac5fe692794a46a0d53f2f02062ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3941716073796617031, guid: 2a45aa3c8c1a251439dbff463b62c104, type: 3}
+  bullet: {fileID: 1094319184742494716, guid: 85059e9f7c8b32142a81cb771a158c58, type: 3}
   shootForce: 300
   upwardForce: 0
   timeBetweenShooting: 0.1
@@ -2278,7 +2280,7 @@ MonoBehaviour:
   wall2: {fileID: 572628799}
   ceiling: {fileID: 814422090}
   floor: {fileID: 1792930956}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &518454629
 GameObject:
@@ -2436,8 +2438,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &572628800
 Rigidbody:
@@ -2796,8 +2799,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isFloorHit: 0
 --- !u!54 &721303455
 Rigidbody:
@@ -3263,8 +3267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isCeilingHit: 0
 --- !u!54 &814422091
 Rigidbody:
@@ -3579,8 +3584,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &932516828
 Rigidbody:
@@ -3812,8 +3818,14 @@ MonoBehaviour:
   timerText: {fileID: 474671602}
   background: {fileID: 1516512791}
   timerScript: {fileID: 474671601}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 0}
   doors: []
+--- !u!1 &1033564593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1094319184742494716, guid: 85059e9f7c8b32142a81cb771a158c58,
+    type: 3}
+  m_PrefabInstance: {fileID: 4473567320874191486}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1035358990
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,7 +3973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 0}
   doorValue: 0
   minValue: 0
   maxValue: 9
@@ -3970,6 +3981,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   characterHealth: {fileID: 0}
+  gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1066488696
@@ -4196,8 +4208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isCeilingHit: 0
 --- !u!54 &1169712719
 Rigidbody:
@@ -4459,8 +4472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isFloorHit: 0
 --- !u!1 &1347378485
 GameObject:
@@ -4609,7 +4623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 0}
   doorValue: 0
   minValue: 0
   maxValue: 9
@@ -4618,6 +4631,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   characterHealth: {fileID: 0}
+  gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1375023778
@@ -4767,8 +4781,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!1 &1410901498
 GameObject:
@@ -5231,7 +5246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 0}
   doorValue: 0
   minValue: 0
   maxValue: 9
@@ -5240,6 +5254,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   characterHealth: {fileID: 0}
+  gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &1638885563
@@ -5529,7 +5544,7 @@ MonoBehaviour:
   wall2: {fileID: 2002221144}
   ceiling: {fileID: 1719092466}
   floor: {fileID: 1304120189}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &1719092460
 GameObject:
@@ -5678,8 +5693,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isCeilingHit: 0
 --- !u!1001 &1753402578
 PrefabInstance:
@@ -5789,8 +5805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isFloorHit: 0
 --- !u!54 &1792930957
 Rigidbody:
@@ -6166,8 +6183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isCeilingHit: 0
 --- !u!54 &1932409685
 Rigidbody:
@@ -6429,7 +6447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neutralizeKey: 110
-  statistics: {fileID: 0}
   doorValue: 0
   minValue: 0
   maxValue: 9
@@ -6438,6 +6455,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   characterPosition: {x: 0, y: 0, z: 0}
   characterHealth: {fileID: 0}
+  gdManager: {fileID: 0}
   regulationRing: {fileID: 0}
   tooCloseToTheDoor: 0
 --- !u!1 &2000116240
@@ -6474,8 +6492,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &2000116242
 Rigidbody:
@@ -6737,8 +6756,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!1 &2047784184
 GameObject:
@@ -6910,8 +6930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isWallHit: 0
 --- !u!54 &2051575755
 Rigidbody:
@@ -7142,7 +7163,7 @@ MonoBehaviour:
   wall2: {fileID: 2000116241}
   ceiling: {fileID: 1169712718}
   floor: {fileID: 2131794581}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
 --- !u!1 &2126031446
 GameObject:
@@ -7224,8 +7245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 491415801}
-  statistics: {fileID: 1704350180}
+  gdManager: {fileID: 13481585}
   regulationRing: {fileID: 90985350}
+  prefab: {fileID: 1033564593}
   isFloorHit: 0
 --- !u!54 &2131794582
 Rigidbody:

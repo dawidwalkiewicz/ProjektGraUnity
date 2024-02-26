@@ -74,14 +74,20 @@ public class GameDataManager : MonoBehaviour
             }
             if (statistics != null)
             {
-                doors[i].statistics = statistics;
+                doors[i].gdManager.statistics = statistics;
             }
         }
     }
 
     void Update()
     {
-        Door door = measureDevice.GetClosestDoor();
-        door.NeutralizeDoor();
+        for (int i = 0; i < doors.Count; i++)
+        {
+            doors[i].NeutralizeDoor();
+        }
+        for (int j = 0; j < rooms.Count; j++)
+        {
+            rooms[j].NeutralizeRoom();
+        }
     }
 }

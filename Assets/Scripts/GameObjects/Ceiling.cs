@@ -1,12 +1,16 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Ceiling : MonoBehaviour
 {
     public WeaponSystem weapon;
-    public Stats statistics;
+    public GameDataManager gdManager;
     public RegulationRing regulationRing;
+    public GameObject prefab;
     public bool isCeilingHit = false;
     private int bulletHitCount = 0;
+    List<Room> rooms;
 
     void Awake()
     {
@@ -14,22 +18,33 @@ public class Ceiling : MonoBehaviour
         {
             weapon = GameObject.Find("Weapon").GetComponent<WeaponSystem>();
         }
-        if (statistics == null)
+        if (gdManager == null)
         {
-            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+            gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         }
+    }
+
+    void Start()
+    {
         if (regulationRing == null)
         {
-            regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
+            regulationRing = gdManager.regulationRing;
         }
-        statistics.MissedWalls = 4;
-        statistics.WallsCounter = 0;
-        statistics.WallsHitMoreThanOnce = 0;
+        if (rooms == null)
+        {
+            rooms = gdManager.rooms;
+        }
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            gdManager.statistics.MissedWalls += 1;
+            gdManager.statistics.WallsCounter = 0;
+            gdManager.statistics.WallsHitMoreThanOnce = 0;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.name == prefab.name)
         {
             bulletHitCount++;
             WasCeilingHit(collision);
@@ -41,15 +56,15 @@ public class Ceiling : MonoBehaviour
         if (bulletHitCount == 1)
         {
             isCeilingHit = true;
-            statistics.WallsCounter++;
-            statistics.MissedWalls--;
+            gdManager.statistics.WallsCounter++;
+            gdManager.statistics.MissedWalls--;
         }
         else if (bulletHitCount > 1)
         {
             isCeilingHit = true;
-            statistics.WallsCounter++;
-            statistics.MissedWalls--;
-            statistics.WallsHitMoreThanOnce++;
+            gdManager.statistics.WallsCounter++;
+            gdManager.statistics.MissedWalls--;
+            gdManager.statistics.WallsHitMoreThanOnce++;
         }
     }
 }

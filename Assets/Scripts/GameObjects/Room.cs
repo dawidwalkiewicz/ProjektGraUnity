@@ -5,25 +5,29 @@ public class Room : MonoBehaviour
     public Wall wall1, wall2;
     public Ceiling ceiling;
     public Floor floor;
-    public Stats statistics;
+    public GameDataManager gdManager;
     public RegulationRing regulationRing;
     MeasureDevice measureDevice;
 
     void Awake()
     {
-        if (statistics == null)
+        if (gdManager == null)
         {
-            statistics = GameObject.Find("Stats").GetComponent<Stats>();
-        }
-        if (regulationRing == null)
-        {
-            regulationRing = GameObject.Find("RegulationRing").GetComponent<RegulationRing>();
+            gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         }
         if (measureDevice == null)
         {
             measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
         }
-        statistics.NeutralizedRoomsCounter = 0;
+    }
+
+    void Start()
+    {
+        if (regulationRing == null)
+        {
+            regulationRing = gdManager.regulationRing;
+        }
+        gdManager.statistics.NeutralizedRoomsCounter = 0;
     }
 
     void Update()
@@ -37,9 +41,14 @@ public class Room : MonoBehaviour
 
     public void NeutralizeRoom()
     {
-        if (regulationRing.numberOfRegulationKeyPressed == 0 & wall1.isWallHit & wall2.isWallHit & ceiling.isCeilingHit && floor.isFloorHit)
+        for (int i = 0; i < gdManager.rooms.Count; i++)
         {
-            statistics.NeutralizedRoomsCounter++;
+            if (gdManager.rooms[i].regulationRing.numberOfRegulationKeyPressed == 0 && gdManager.rooms[i].wall1.isWallHit
+                && gdManager.rooms[i].wall2.isWallHit && gdManager.rooms[i].ceiling.isCeilingHit &&
+                gdManager.rooms[i].floor.isFloorHit)
+            {
+                gdManager.statistics.NeutralizedRoomsCounter++;
+            }
         }
     }
 }

@@ -15,21 +15,21 @@ public class CharacterHealth : MonoBehaviour
     public TMP_Text timerText;
     public Image background;
     public TimerScript timerScript;
-    public Stats statistics;
+    public GameDataManager gdManager;
     public List<Door> doors;
 
     void Awake()
     {
-        if (statistics == null)
+        if (gdManager == null)
         {
-            statistics = GameObject.Find("Stats").GetComponent<Stats>();
+            gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
         }
-        statistics.GameCompletionTime = "0:00,000";
+        gdManager.statistics.GameCompletionTime = "0:00,000";
     }    
 
     void Start()
     {
-        doors ??= GameObject.Find("GameDataManager").GetComponent<GameDataManager>().doors;
+        doors ??= gdManager.doors;
         health = maxHealth;
         dead = false;
         for (int i = 0; i < doors.Count; i++)
@@ -51,7 +51,7 @@ public class CharacterHealth : MonoBehaviour
             timerScript.enabled = false;
             background.enabled = true;
             gameOverText.enabled = true;
-            statistics.GameCompletionTime = timerScript.ToString();
+            gdManager.statistics.GameCompletionTime = timerScript.ToString();
             Destroy(gameObject);
             SceneManager.LoadScene("Phasis3");
         }

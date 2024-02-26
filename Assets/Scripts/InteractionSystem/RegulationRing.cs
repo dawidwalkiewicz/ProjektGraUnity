@@ -15,16 +15,12 @@ public class RegulationRing : MonoBehaviour
     public float speed = 30;
 
     public GameDataManager gdManager;
-    public Stats statistics;
     public MeasureDevice measureDevice;
     public List<Door> doors;
+    public List<Room> rooms;
 
     void Awake()
     {
-        if (statistics == null)
-        {
-            statistics = GameObject.Find("Stats").GetComponent<Stats>();
-        }
         if (gdManager == null)
         {
             gdManager = GameObject.Find("GameDataManager").GetComponent<GameDataManager>();
@@ -33,14 +29,15 @@ public class RegulationRing : MonoBehaviour
         {
             measureDevice = GameObject.Find("MeasureDevice").GetComponent<MeasureDevice>();
         }
-        statistics.TooHighValue = false;
-        statistics.TooLowValue = false;
-        statistics.WrongRingSettings = false;
     }
 
     void Start()
     {
         doors = gdManager.doors;
+        rooms = gdManager.rooms;
+        gdManager.statistics.TooHighValue = false;
+        gdManager.statistics.TooLowValue = false;
+        gdManager.statistics.WrongRingSettings = false;
     }
 
     void Update()
@@ -67,31 +64,29 @@ public class RegulationRing : MonoBehaviour
     {
         if (numberOfRegulationKeyPressed == defaultNumberOfRegulationKeyPressed)
         {
-            statistics.WrongRingSettings = false;
-            statistics.TooLowValue = false;
-            statistics.TooHighValue = false;
+            gdManager.statistics.WrongRingSettings = false;
+            measureDevice.doorValueText.text = "Ring reseted";
         }
         else
         {
-            statistics.WrongRingSettings = true;
-            if (numberOfRegulationKeyPressed > defaultNumberOfRegulationKeyPressed)
-            {
-                statistics.TooLowValue = true;
-                statistics.TooHighValue = false;
-            }
-            else if (numberOfRegulationKeyPressed < defaultNumberOfRegulationKeyPressed)
-            {
-                statistics.TooHighValue = true;
-                statistics.TooLowValue = false;
-            }
+            gdManager.statistics.WrongRingSettings = true;
+            measureDevice.doorValueText.text = "Wrong ring settings";
         }
     }
 
     public void RegulateRingPlus(Door door)
     {
-        if (door != null)
+        if (door != null && door.doorValue < door.minValue && !door.IsNeutralized)
         {
             transform.Rotate(speed * Time.deltaTime * Vector3.up);
+            gdManager.statistics.TooHighValue = true;
+            gdManager.statistics.TooLowValue = false;
+            measureDevice.doorValueText.text += System.Environment.NewLine + "Too high value set";
+        }
+        else if (door.IsNeutralized)
+        {
+            transform.Rotate(speed * Time.deltaTime * Vector3.up);
+            IsRingReseted();
         }
     }
 
@@ -107,8 +102,11 @@ public class RegulationRing : MonoBehaviour
             }
             else if (door.doorValue == door.minValue)
             {
+                gdManager.statistics.TooLowValue = false;
+                gdManager.statistics.TooHighValue = false;
                 measureDevice.MeasureDoorValue();
                 measureDevice.UpdateTextAndValue(doors.IndexOf(door), door.doorValue);
+                gdManager.statistics.WasMeasurementSet = true;
             }
         }
     }
